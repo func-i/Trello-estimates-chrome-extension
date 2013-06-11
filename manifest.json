@@ -1,0 +1,45 @@
+{
+  "manifest_version": 2,
+
+  "name": "Github-Trello",
+  "description": "Trello extension for chrome",
+  "version": "0.1",
+
+  "permissions": [
+    "http://localhost:3000/estimations"
+  ],
+
+  "background": {
+    "scripts": [
+      "/src/javascript/vendors/jquery-1.10.1.min.js",
+      "src/javascript/background.js"
+    ],
+    "persistent": false
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "*://trello.com/board/*",
+        "*://trello.com/card/*"
+      ],
+      "css": [
+        "/src/stylesheet/vendor/ui-lightness/jquery-ui-1.10.3.custom.css",
+        "/src/stylesheet/vendor/ui-lightness/jquery-ui-1.10.3.custom.min.css"
+      ],
+      "js": [
+        "/src/javascript/vendors/jquery-1.10.1.min.js",
+        "/src/javascript/vendors/jquery-ui-1.10.3.custom.min.js",
+        "src/javascript/vendors/client.js",
+        "/src/javascript/trello.js",
+        "/src/javascript/estimations.js"
+      ]
+    }
+  ],
+
+  "web_accessible_resources": [
+    "/src/html/estimation_modal.html",
+    "/src/html/estimation_btn.html",
+    "/src/html/card_estimation_btn.html"
+  ]
+}

@@ -1,0 +1,1 @@
+coffee --watch --compile --output src/javascript/ src/javascript/coffee

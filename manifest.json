@@ -30,8 +30,6 @@
       "js": [
         "/src/javascript/vendors/jquery-1.10.1.min.js",
         "/src/javascript/vendors/jquery-ui-1.10.3.custom.min.js",
-        "src/javascript/vendors/client.js",
-        "/src/javascript/trello.js",
         "/src/javascript/estimations.js"
       ]
     }
@@ -40,6 +38,7 @@
   "web_accessible_resources": [
     "/src/html/estimation_modal.html",
     "/src/html/estimation_btn.html",
+    "/src/html/estimations.html",
     "/src/html/card_estimation_btn.html"
   ]
 }

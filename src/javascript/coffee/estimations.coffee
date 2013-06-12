@@ -26,34 +26,21 @@ loadCode = ()->
   setEstimationTime = (time)->
     $("#estimation_time").val(time)
 
-#  loadEstimationForCurrentUser = ()->
-#    chrome.runtime.sendMessage
-#      action: "getEstimation"
-#      boardId: getBoardId()
-#      cardId: getCardId()
-#      username: getUsername()
-#      (response)->
-#        setEstimationTime response.estimation.time if response.estimation
+  #  loadEstimationForCurrentUser = ()->
+  #    chrome.runtime.sendMessage
+  #      action: "getEstimation"
+  #      boardId: getBoardId()
+  #      cardId: getCardId()
+  #      username: getUsername()
+  #      (response)->
+  #        setEstimationTime response.estimation.time if response.estimation
 
   buildEstimationObject = ()->
-    managerEstimation = $("#manager_estimation_time").val()
-    developerEstimation = $("#estimation_time").val()
-
     estimation =
       board_id: getBoardId()
       card_id: getCardId()
-
-    if $.trim(developerEstimation).length > 0
-      estimation = $.extend estimation,
-                            type: "developer"
-                            user_time: developerEstimation
-                            user_username: getUsername()
-
-    else
-      estimation = $.extend estimation,
-                            type: "manager"
-                            user_time: managerEstimation
-                            user_username: getUsername()
+      user_time: $("#estimation_time").val()
+      user_username: getUsername()
 
   sendEstimation = ()->
     $.ajax "http://localhost:3000/estimations",
@@ -97,7 +84,7 @@ loadCode = ()->
              createCardEstimationModal()
              $(".js-add-estimation-menu").on "click", ()->
                $("#estimation_dialog").dialog("open")
-#               loadEstimationForCurrentUser()
+  #               loadEstimationForCurrentUser()
 
   populateEstimationSection = ()->
     $.ajax "http://localhost:3000/estimations",
@@ -107,7 +94,10 @@ loadCode = ()->
            async: false,
            success: (response)->
              for estimation in response
-               html = "<tr><td>#{estimation.developer_name}</td><td>#{estimation.developer_time}</td><td>#{estimation.manager_name}</td><td>#{estimation.manager_time}</td></tr>"
+               is_manager = ""
+               is_manager = "(M)" if response.is_manager?
+
+               html = "<tr><td>#{is_manager}#{estimation.user_name}</td><td>#{estimation.user_time}</td></tr>"
                $(".estimations").find("tbody").append(html)
 
   createDisplayEstimations = ()->

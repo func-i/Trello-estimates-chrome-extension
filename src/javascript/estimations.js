@@ -33,27 +33,14 @@
       return $("#estimation_time").val(time);
     };
     buildEstimationObject = function() {
-      var developerEstimation, estimation, managerEstimation;
+      var estimation;
 
-      managerEstimation = $("#manager_estimation_time").val();
-      developerEstimation = $("#estimation_time").val();
-      estimation = {
+      return estimation = {
         board_id: getBoardId(),
-        card_id: getCardId()
+        card_id: getCardId(),
+        user_time: $("#estimation_time").val(),
+        user_username: getUsername()
       };
-      if ($.trim(developerEstimation).length > 0) {
-        return estimation = $.extend(estimation, {
-          type: "developer",
-          user_time: developerEstimation,
-          user_username: getUsername()
-        });
-      } else {
-        return estimation = $.extend(estimation, {
-          type: "manager",
-          user_time: managerEstimation,
-          user_username: getUsername()
-        });
-      }
     };
     sendEstimation = function() {
       return $.ajax("http://localhost:3000/estimations", {
@@ -117,12 +104,16 @@
         },
         async: false,
         success: function(response) {
-          var estimation, html, _i, _len, _results;
+          var estimation, html, is_manager, _i, _len, _results;
 
           _results = [];
           for (_i = 0, _len = response.length; _i < _len; _i++) {
             estimation = response[_i];
-            html = "<tr><td>" + estimation.developer_name + "</td><td>" + estimation.developer_time + "</td><td>" + estimation.manager_name + "</td><td>" + estimation.manager_time + "</td></tr>";
+            is_manager = "";
+            if (response.is_manager != null) {
+              is_manager = "(M)";
+            }
+            html = "<tr><td>" + is_manager + estimation.user_name + "</td><td>" + estimation.user_time + "</td></tr>";
             _results.push($(".estimations").find("tbody").append(html));
           }
           return _results;

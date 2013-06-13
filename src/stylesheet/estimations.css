@@ -1,0 +1,22 @@
+#estimations_content {
+    display: none;
+}
+
+.estimations {
+    display: none;
+}
+
+.estimation_custom_dialog .ui-dialog-titlebar {
+    background: linear-gradient(to bottom, #23658b 0%, #1c506e 100%);
+    border: 1px solid #1c506e;
+}
+
+#estimation_dialog_btn_section {
+    text-align: center;
+}
+
+#estimation_dialog_btn_section .button-link {
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
+}

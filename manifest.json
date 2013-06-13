@@ -6,6 +6,7 @@
   "version": "0.1",
 
   "permissions": [
+    "tabs",
     "http://localhost:3000/estimations"
   ],
 
@@ -25,7 +26,10 @@
       ],
       "css": [
         "/src/stylesheet/vendor/ui-lightness/jquery-ui-1.10.3.custom.css",
-        "/src/stylesheet/vendor/ui-lightness/jquery-ui-1.10.3.custom.min.css"
+        "/src/stylesheet/vendor/ui-lightness/jquery-ui-1.10.3.custom.min.css",
+        "/src/stylesheet/vendor/bootstrap.min.css",
+        "/src/stylesheet/estimations.css",
+        "/src/stylesheet/spinner.css"
       ],
       "js": [
         "/src/javascript/vendors/jquery-1.10.1.min.js",
@@ -37,8 +41,14 @@
 
   "web_accessible_resources": [
     "/src/html/estimation_modal.html",
-    "/src/html/estimation_btn.html",
     "/src/html/estimations.html",
-    "/src/html/card_estimation_btn.html"
+    "/src/html/card_estimation_btn.html",
+    "/src/stylesheet/vendor/ui-lightness/images/ui-icons_ef8c08_256x240.png",
+    "/src/stylesheet/vendor/ui-lightness/images/ui-icons_222222_256x240.png",
+    "/src/stylesheet/vendor/ui-lightness/images/ui-bg_diagonals-thick_20_666666_40x40.png",
+    "/src/stylesheet/vendor/ui-lightness/images/ui-bg_glass_100_f6f6f6_1x400.png",
+    "/src/stylesheet/vendor/ui-lightness/images/ui-bg_glass_100_fdf5ce_1x400.png",
+    "/src/stylesheet/vendor/ui-lightness/images/ui-bg_glass_65_ffffff_1x400.png",
+    "/src/stylesheet/vendor/ui-lightness/images/ui-bg_highlight-soft_100_eeeeee_1x100.png"
   ]
 }

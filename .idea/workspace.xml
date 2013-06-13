@@ -4,8 +4,8 @@
     <list default="true" id="6b0a9f21-e58a-479e-baac-efe91d5b5532" name="Default" comment="" />
     <ignored path="Github-Trello.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371073462334" ignored="false" />
-    <file path="/*.regexp" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371073632313" ignored="false" />
+    <file path="/Dummy.txt" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371140792846" ignored="false" />
+    <file path="/*.regexp" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371152346839" ignored="false" />
     <file path="/manisfest.json" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370632535044" ignored="false" />
     <file path="$PROJECT_DIR$/../EventStream/db/schema.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370628955777" ignored="false" />
     <file path="$PROJECT_DIR$/../EventStream/app/models/room.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370628955777" ignored="false" />
@@ -16,17 +16,17 @@
     <file path="/popup.html" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370636261004" ignored="false" />
     <file path="$PROJECT_DIR$/../EventStream/Procfile" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370635936156" ignored="false" />
     <file path="/popup.js.coffee" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370635418472" ignored="false" />
-    <file path="/background.coffee" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370983214382" ignored="false" />
+    <file path="/background.coffee" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371142843448" ignored="false" />
     <file path="/Procfile" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370635930196" ignored="false" />
     <file path="/estimatives.coffee" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370642726788" ignored="false" />
     <file path="/estimative_btn.html" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370642238693" ignored="false" />
-    <file path="/manifest.json" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370977198617" ignored="false" />
+    <file path="/manifest.json" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371131682452" ignored="false" />
     <file path="/estimative_modal.html" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370641207215" ignored="false" />
     <file path="/card_estimative_btn.html" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370877828390" ignored="false" />
-    <file path="/estimations.coffee" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371074235397" ignored="false" />
+    <file path="/estimations.coffee" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371159628222" ignored="false" />
     <file path="/my_estimation_form.html" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370879247157" ignored="false" />
     <file path="/estimations.js" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370880788857" ignored="false" />
-    <file path="/estimation_modal.html" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371073202093" ignored="false" />
+    <file path="/estimation_modal.html" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371153562353" ignored="false" />
     <file path="/estimation_btn.html" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370885259325" ignored="false" />
     <file path="/popup.coffee" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370886174173" ignored="false" />
     <file path="/trello.coffee" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370887945377" ignored="false" />
@@ -46,10 +46,10 @@
     <file path="$PROJECT_DIR$/../Github-Trello-rails/app/views/layouts/application.html.erb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371070419750" ignored="false" />
     <file path="$PROJECT_DIR$/../Github-Trello-rails/app/assets/javascripts/dashboard.js.coffee" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370902114535" ignored="false" />
     <file path="/dashboard.js.coffee" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370896506726" ignored="false" />
-    <file path="$PROJECT_DIR$/../Github-Trello-rails/app/controllers/estimations_controller.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371073858829" ignored="false" />
-    <file path="/estimations_controller.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371073858829" ignored="false" />
-    <file path="$PROJECT_DIR$/../Github-Trello-rails/app/models/estimation.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371072929826" ignored="false" />
-    <file path="/estimation.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371072926938" ignored="false" />
+    <file path="$PROJECT_DIR$/../Github-Trello-rails/app/controllers/estimations_controller.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371158097059" ignored="false" />
+    <file path="/estimations_controller.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371157817602" ignored="false" />
+    <file path="$PROJECT_DIR$/../Github-Trello-rails/app/models/estimation.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371144688616" ignored="false" />
+    <file path="/estimation.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371137704157" ignored="false" />
     <file path="$PROJECT_DIR$/../Github-Trello-rails/log/development.log" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371063713372" ignored="false" />
     <file path="$USER_HOME$/.rvm/gems/ruby-1.9.3-p194/gems/ruby-trello-1.0.1/lib/trello.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370900114179" ignored="false" />
     <file path="$USER_HOME$/.rvm/gems/ruby-1.9.3-p194/gems/ruby-trello-1.0.1/lib/trello/authorization.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370900114179" ignored="false" />
@@ -69,21 +69,21 @@
     <file path="/helper.coffee" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370969159286" ignored="false" />
     <file path="/application_controller.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371050986008" ignored="false" />
     <file path="/Gemfile" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371057001293" ignored="false" />
-    <file path="/estimations.html" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370986064232" ignored="false" />
-    <file path="$PROJECT_DIR$/../Github-Trello-rails/app/views/estimations/index.json.jbuilder" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370987868298" ignored="false" />
-    <file path="/index.json.jbuilder" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1370987806330" ignored="false" />
+    <file path="/estimations.html" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371152343475" ignored="false" />
+    <file path="$PROJECT_DIR$/../Github-Trello-rails/app/views/estimations/index.json.jbuilder" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371135885294" ignored="false" />
+    <file path="/index.json.jbuilder" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371135879868" ignored="false" />
     <file path="$PROJECT_DIR$/../Github-Trello-rails/app/views/estimations/_estimation.json.jbuilder" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371073156687" ignored="false" />
     <file path="/_estimation.json.jbuilder" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371073128979" ignored="false" />
-    <file path="$PROJECT_DIR$/../Github-Trello-rails/app/views/boards/show.html.erb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371058005702" ignored="false" />
-    <file path="/show.html.erb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371063616488" ignored="false" />
+    <file path="$PROJECT_DIR$/../Github-Trello-rails/app/views/boards/show.html.erb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371148076747" ignored="false" />
+    <file path="/show.html.erb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371148017088" ignored="false" />
     <file path="$PROJECT_DIR$/../Github-Trello-rails/app/helpers/estimations_helper.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371048130688" ignored="false" />
     <file path="/estimations_helper.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371048125465" ignored="false" />
     <file path="/board.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371047643108" ignored="false" />
     <file path="$PROJECT_DIR$/../Github-Trello-rails/app/models/business/board.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371047413510" ignored="false" />
     <file path="$PROJECT_DIR$/../Github-Trello-rails/app/models/business/project.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371047646913" ignored="false" />
     <file path="$PROJECT_DIR$/../Github-Trello-rails/app/views/users/show.html.erb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371049202935" ignored="false" />
-    <file path="$PROJECT_DIR$/../Github-Trello-rails/app/views/pages/dashboard.html.erb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371057971638" ignored="false" />
-    <file path="/dashboard.html.erb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371057971638" ignored="false" />
+    <file path="$PROJECT_DIR$/../Github-Trello-rails/app/views/pages/dashboard.html.erb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371158461265" ignored="false" />
+    <file path="/dashboard.html.erb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371158461265" ignored="false" />
     <file path="$PROJECT_DIR$/../Github-Trello-rails/config/application.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371052976609" ignored="false" />
     <file path="/application.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371052970424" ignored="false" />
     <file path="$PROJECT_DIR$/../Github-Trello-rails/app/views/harvest_trellos/index.html.erb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371057867951" ignored="false" />
@@ -93,23 +93,30 @@
     <file path="$PROJECT_DIR$/../Github-Trello-rails/config/application.yml" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371061281779" ignored="false" />
     <file path="$PROJECT_DIR$/../Github-Trello-rails/app/helpers/harvest_trellos_helper.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371062325231" ignored="false" />
     <file path="/harvest_trellos_helper.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371062320224" ignored="false" />
-    <file path="$PROJECT_DIR$/../Github-Trello-rails/app/models/harvest_log.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371073644004" ignored="false" />
-    <file path="/harvest_log.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371070118328" ignored="false" />
+    <file path="$PROJECT_DIR$/../Github-Trello-rails/app/models/harvest_log.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371158967121" ignored="false" />
+    <file path="/harvest_log.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371158945470" ignored="false" />
     <file path="$PROJECT_DIR$/../Github-Trello-rails/db/migrate/20130612180817_create_harvest_logs.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371068413507" ignored="false" />
     <file path="/20130612180817_create_harvest_logs.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371063413758" ignored="false" />
-    <file path="$PROJECT_DIR$/../Github-Trello-rails/app/models/harvest_trello.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371069201519" ignored="false" />
-    <file path="/harvest_trello.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371069189643" ignored="false" />
+    <file path="$PROJECT_DIR$/../Github-Trello-rails/app/models/harvest_trello.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371137757284" ignored="false" />
+    <file path="/harvest_trello.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371134465816" ignored="false" />
     <file path="/20130612171930_create_harvest_trellos.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371063418534" ignored="false" />
     <file path="$PROJECT_DIR$/../Github-Trello-rails/db/migrate/20130612171930_create_harvest_trellos.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371063418534" ignored="false" />
     <file path="$PROJECT_DIR$/../Github-Trello-rails/app/views/harvest_trellos/_form.html.erb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371063628387" ignored="false" />
     <file path="/_form.html.erb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371063545053" ignored="false" />
     <file path="$PROJECT_DIR$/../Github-Trello-rails/app/views/harvest_trellos/show.html.erb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371063616819" ignored="false" />
     <file path="$PROJECT_DIR$/../Github-Trello-rails/lib/tasks/harvest_log.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371066292469" ignored="false" />
-    <file path="/harvest_log.rake" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371073597760" ignored="false" />
-    <file path="$PROJECT_DIR$/../Github-Trello-rails/lib/tasks/harvest_log.rake" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371073625886" ignored="false" />
+    <file path="/harvest_log.rake" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371133862783" ignored="false" />
+    <file path="$PROJECT_DIR$/../Github-Trello-rails/lib/tasks/harvest_log.rake" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371133905498" ignored="false" />
     <file path="$PROJECT_DIR$/../Github-Trello-rails/app/views/admins/index.html.erb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371070525823" ignored="false" />
-    <file path="$PROJECT_DIR$/../Github-Trello-rails/app/models/admin.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371073898626" ignored="false" />
+    <file path="$PROJECT_DIR$/../Github-Trello-rails/app/models/admin.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371137770496" ignored="false" />
     <file path="/admin.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371073885855" ignored="false" />
+    <file path="$PROJECT_DIR$/../Github-Trello-rails/app/views/pages/_board.html.erb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371158573437" ignored="false" />
+    <file path="/_board.html.erb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371144815880" ignored="false" />
+    <file path="/spinner.css" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371150423201" ignored="false" />
+    <file path="/estimations.css" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371153699033" ignored="false" />
+    <file path="/jquery-ui-1.10.3.custom.css" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371156172041" ignored="false" />
+    <file path="$PROJECT_DIR$/../Github-Trello-rails/app/helpers/boards_helper.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371160732927" ignored="false" />
+    <file path="/boards_helper.rb" changelist="6b0a9f21-e58a-479e-baac-efe91d5b5532" time="1371160165911" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,10 +132,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="manifest.json" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/manifest.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="45" column="75" selection-start="1190" selection-end="1217" vertical-scroll-proportion="-3.4363637">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="jquery-ui-1.10.3.custom.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/stylesheet/vendor/ui-lightness/jquery-ui-1.10.3.custom.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="477" column="109" selection-start="11938" selection-end="12021" vertical-scroll-proportion="-6.032258">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="estimations.coffee" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/javascript/coffee/estimations.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="99" column="23" selection-start="3198" selection-end="3198" vertical-scroll-proportion="0.4087838">
+            <state line="141" column="16" selection-start="5049" selection-end="5049" vertical-scroll-proportion="0.92105263">
               <folding />
             </state>
           </provider>
@@ -137,67 +162,7 @@
       <file leaf-file-name="estimation_modal.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/html/estimation_modal.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="45" selection-start="114" selection-end="114" vertical-scroll-proportion="-1.875">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="card_estimation_btn.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/html/card_estimation_btn.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="44" selection-start="22" selection-end="44" vertical-scroll-proportion="-0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="estimations.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/javascript/estimations.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="129" column="10" selection-start="4555" selection-end="4555" vertical-scroll-proportion="-10.133333">
-              <folding>
-                <marker date="1371074248676" expanded="true" signature="1296:1394" placeholder="{...}" />
-                <marker date="1371074248676" expanded="true" signature="1389:1510" placeholder="{...}" />
-                <marker date="1371074248676" expanded="true" signature="1395:1490" placeholder="{&quot;type&quot;: &quot;developer&quot;...}" />
-                <marker date="1371074248676" expanded="true" signature="1516:1686" placeholder="{...}" />
-                <marker date="1371074248676" expanded="true" signature="1549:1651" placeholder="{&quot;type&quot;: &quot;manager&quot;...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="estimations.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/html/estimations.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="0" selection-start="146" selection-end="146" vertical-scroll-proportion="-6.25">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="background.coffee" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/javascript/coffee/background.coffee">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="0" selection-start="326" selection-end="593" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.txt" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="71" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="manifest.json" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/manifest.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="26" selection-start="983" selection-end="983" vertical-scroll-proportion="0.0">
+            <state line="4" column="118" selection-start="231" selection-end="246" vertical-scroll-proportion="-2.5">
               <folding />
             </state>
           </provider>
@@ -213,21 +178,21 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/javascript/coffee/estimatives.coffee" />
-        <option value="$PROJECT_DIR$/src/html/estimative_modal.html" />
-        <option value="$PROJECT_DIR$/src/html/card_estimative_btn.html" />
-        <option value="$PROJECT_DIR$/src/html/card_estimation_btn.html" />
-        <option value="$PROJECT_DIR$/src/html/my_estimation_form.html" />
         <option value="$PROJECT_DIR$/src/html/estimation_btn.html" />
         <option value="$PROJECT_DIR$/src/javascript/coffee/popup.coffee" />
         <option value="$PROJECT_DIR$/src/javascript/vendors/client.js" />
         <option value="$PROJECT_DIR$/src/javascript/coffee/trello.coffee" />
         <option value="$PROJECT_DIR$/src/javascript/coffee/helper.coffee" />
-        <option value="$PROJECT_DIR$/src/javascript/coffee/background.coffee" />
-        <option value="$PROJECT_DIR$/manifest.json" />
         <option value="$PROJECT_DIR$/src/javascript/estimations.js" />
+        <option value="$PROJECT_DIR$/src/javascript/coffee/background.coffee" />
+        <option value="$PROJECT_DIR$/src/stylesheet/spinner_css.css" />
+        <option value="$PROJECT_DIR$/src/stylesheet/spinner.css" />
         <option value="$PROJECT_DIR$/src/html/estimations.html" />
         <option value="$PROJECT_DIR$/src/html/estimation_modal.html" />
+        <option value="$PROJECT_DIR$/src/stylesheet/estimations.css" />
+        <option value="$PROJECT_DIR$/manifest.json" />
+        <option value="$PROJECT_DIR$/src/stylesheet/vendor/ui-lightness/jquery-ui-1.10.3.custom.css" />
+        <option value="$PROJECT_DIR$/src/stylesheet/vendor/ui-lightness/jquery-ui-1.10.3.custom.min.css" />
         <option value="$PROJECT_DIR$/src/javascript/coffee/estimations.coffee" />
       </list>
     </option>
@@ -264,7 +229,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -296,22 +260,8 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Github-Trello" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Github-Trello" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javascript" />
+              <option name="myItemId" value="stylesheet" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -329,11 +279,85 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="javascript" />
+              <option name="myItemId" value="stylesheet" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="vendors" />
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Github-Trello" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Github-Trello" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stylesheet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui-lightness" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Github-Trello" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Github-Trello" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="stylesheet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui-lightness" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="images" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Github-Trello" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Github-Trello" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascript" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -379,6 +403,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -530,9 +555,10 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32988167" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28297362" sideWeight="0.67011833" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28856915" sideWeight="0.67011833" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -541,7 +567,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32988167" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -601,118 +626,96 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="3" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/html/estimations.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="23" selection-start="33" selection-end="44" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/stylesheet/vendor/ui-lightness/images/ui-bg_flat_10_000000_40x100.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/javascript/coffee/background.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="0" selection-start="326" selection-end="593" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/stylesheet/vendor/ui-lightness/images/ui-bg_glass_65_ffffff_1x400.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stylesheet/vendor/ui-lightness/images/ui-bg_glass_100_f6f6f6_1x400.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stylesheet/vendor/ui-lightness/images/ui-bg_glass_100_fdf5ce_1x400.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stylesheet/vendor/ui-lightness/images/ui-bg_gloss-wave_35_f6a828_500x100.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stylesheet/vendor/ui-lightness/images/ui-bg_highlight-soft_75_ffe45c_1x100.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stylesheet/vendor/ui-lightness/images/ui-bg_highlight-soft_100_eeeeee_1x100.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stylesheet/vendor/ui-lightness/images/ui-icons_228ef1_256x240.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stylesheet/vendor/ui-lightness/images/ui-icons_ef8c08_256x240.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stylesheet/vendor/ui-lightness/images/ui-icons_ffd27a_256x240.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/stylesheet/vendor/ui-lightness/images/ui-icons_222222_256x240.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/manifest.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="26" selection-start="983" selection-end="983" vertical-scroll-proportion="0.0">
+        <state line="45" column="75" selection-start="1190" selection-end="1217" vertical-scroll-proportion="-3.4363637">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/javascript/vendors/jquery-1.10.1.min.js">
+    <entry file="file://$PROJECT_DIR$/src/stylesheet/vendor/ui-lightness/jquery-ui-1.10.3.custom.min.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="28786" selection-start="92975" selection-end="92975" vertical-scroll-proportion="0.11829653" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/javascript/vendors/jquery-ui-1.10.3.custom.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="91" selection-start="409" selection-end="409" vertical-scroll-proportion="0.12295082" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/stylesheet/vendor/bootstrap.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="4" column="18739" selection-start="20303" selection-end="20303" vertical-scroll-proportion="0.17094018">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/javascript/background.js">
+    <entry file="file://$PROJECT_DIR$/src/stylesheet/vendor/ui-lightness/jquery-ui-1.10.3.custom.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="5" selection-start="40" selection-end="40" vertical-scroll-proportion="0.0375">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/html/estimation_btn.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="65" selection-start="292" selection-end="292" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manifest.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="26" selection-start="983" selection-end="983" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/javascript/estimations.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="10" selection-start="4555" selection-end="4555" vertical-scroll-proportion="-10.133333">
-          <folding>
-            <marker date="1371074248676" expanded="true" signature="1296:1394" placeholder="{...}" />
-            <marker date="1371074248676" expanded="true" signature="1389:1510" placeholder="{...}" />
-            <marker date="1371074248676" expanded="true" signature="1395:1490" placeholder="{&quot;type&quot;: &quot;developer&quot;...}" />
-            <marker date="1371074248676" expanded="true" signature="1516:1686" placeholder="{...}" />
-            <marker date="1371074248676" expanded="true" signature="1549:1651" placeholder="{&quot;type&quot;: &quot;manager&quot;...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="71" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/javascript/coffee/background.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="0" selection-start="326" selection-end="593" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/html/card_estimation_btn.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="44" selection-start="22" selection-end="44" vertical-scroll-proportion="-0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/html/estimations.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="146" selection-end="146" vertical-scroll-proportion="-6.25">
+        <state line="477" column="109" selection-start="11938" selection-end="12021" vertical-scroll-proportion="-6.032258">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/html/estimation_modal.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="45" selection-start="114" selection-end="114" vertical-scroll-proportion="-1.875">
+        <state line="4" column="118" selection-start="231" selection-end="246" vertical-scroll-proportion="-2.5">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/javascript/coffee/estimations.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="99" column="23" selection-start="3198" selection-end="3198" vertical-scroll-proportion="0.4087838">
+        <state line="141" column="16" selection-start="5049" selection-end="5049" vertical-scroll-proportion="0.92105263">
           <folding />
         </state>
       </provider>

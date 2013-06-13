@@ -26,15 +26,6 @@ loadCode = ()->
   setEstimationTime = (time)->
     $("#estimation_time").val(time)
 
-  #  loadEstimationForCurrentUser = ()->
-  #    chrome.runtime.sendMessage
-  #      action: "getEstimation"
-  #      boardId: getBoardId()
-  #      cardId: getCardId()
-  #      username: getUsername()
-  #      (response)->
-  #        setEstimationTime response.estimation.time if response.estimation
-
   buildEstimationObject = ()->
     estimation =
       board_id: getBoardId()
@@ -49,14 +40,10 @@ loadCode = ()->
              estimation: buildEstimationObject()
            async: false,
            success: (response)->
+             $("#estimation_section").remove()
+             createDisplayEstimations()
+             $("#estimation_time").val("")
              $("#estimation_dialog").dialog("close")
-
-  createBoardEstimationButton = ()->
-    $.ajax chrome.extension.getURL("src/html/estimation_btn.html"),
-           dataType: 'html'
-           success: (html)->
-             $(".list-card .badges").each ()->
-             $(this).append(html)
 
   bindEstimationModalEvents=()->
     $("#estimation_modal_btn").click (e)->
@@ -74,31 +61,67 @@ loadCode = ()->
              $("#estimation_dialog").dialog
                autoOpen: false
                modal: true
-
+               dialogClass: "estimation_custom_dialog"
+               title: "Estimate time for this card"
 
   createCardEstimationButton = ()->
     $.ajax chrome.extension.getURL("src/html/card_estimation_btn.html"),
            dataType: 'html'
            success: (html)->
              $(".other-actions").find(".clearfix").prepend(html)
-             createCardEstimationModal()
+             createCardEstimationModal() if $("#estimation_dialog").length == 0
              $(".js-add-estimation-menu").on "click", ()->
                $("#estimation_dialog").dialog("open")
-  #               loadEstimationForCurrentUser()
+
+  cardUnderestimated = ()->
+    $("#estimation_progress").addClass("bar-danger")
+    $("#estimation_progress").css("width", "100%")
+
+  cardInProgress = (total_worked)->
+    $("#estimation_progress").css("width", "#{total_worked}%")
+
+  loadEstimationTimeTrackerBar = (total_tracked_time, total_estimation_time)->
+    if total_tracked_time > total_estimation_time
+      cardUnderestimated()
+    else
+      total_worked = (100*total_tracked_time)/total_estimation_time
+      cardInProgress(total_worked)
+
+  bindGeneralEstimationEvents = ()->
+    $("#estimation_details").on "click", ()->
+      $estimationsSection = $(".estimations")
+      if $estimationsSection.css("display") == "none"
+        $estimationsSection.show()
+        $("#estimation_details").text("Hide Details")
+      else
+        $estimationsSection.hide()
+        $("#estimation_details").text("More Details")
 
   populateEstimationSection = ()->
     $.ajax "http://localhost:3000/estimations",
            data:
              boardId: getBoardId()
              cardId: getCardId()
-           async: false,
            success: (response)->
-             for estimation in response
-               is_manager = ""
-               is_manager = "(M)" if response.is_manager?
+             total_estimation = response.estimations.reduce ((total, estimation)-> total + estimation.user_time), 0
+             total_estimation = total_estimation/ (response.estimations.length * 1.0) if response.estimations.length > 0
 
-               html = "<tr><td>#{is_manager}#{estimation.user_name}</td><td>#{estimation.user_time}</td></tr>"
+             loadEstimationTimeTrackerBar(response.total_tracked_time, total_estimation)
+
+             for estimation in response.estimations
+               is_manager = ""
+               is_manager = "(M)" if estimation.is_manager
+
+               html = "<tr><td>#{is_manager} #{estimation.user_name}</td><td>#{estimation.user_time}</td></tr>"
                $(".estimations").find("tbody").append(html)
+
+             $("#floatingCirclesG").hide()
+             $("#estimations_content").show()
+
+             $("#estimated_time_span").text("Estimated Time: #{total_estimation}")
+             $("#tracked_time_span").text("Tracked Time: #{response.total_tracked_time}")
+
+             bindGeneralEstimationEvents()
 
   createDisplayEstimations = ()->
     $.ajax chrome.extension.getURL("src/html/estimations.html"),
@@ -108,19 +131,11 @@ loadCode = ()->
              populateEstimationSection()
 
   generateHTMLCode = ()->
-    createBoardEstimationButton()
-    if cardDetailsIsOpen()
       createCardEstimationButton()
       createDisplayEstimations()
 
   generateHTMLCode()
 
-
-timer = setInterval(
-  ()->
-    if $(".other-actions").length > 0
-      loadCode()
-      clearInterval timer
-
-, 250)
+chrome.runtime.onMessage.addListener (message, sender, sendResponse)->
+  loadCode() if cardDetailsIsOpen() && $(".js-add-estimation-menu").length == 0
 

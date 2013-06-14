@@ -2,10 +2,6 @@
     display: none;
 }
 
-.estimations {
-    display: none;
-}
-
 .estimation_custom_dialog .ui-dialog-titlebar {
     background: linear-gradient(to bottom, #23658b 0%, #1c506e 100%);
     border: 1px solid #1c506e;
@@ -19,4 +15,26 @@
     width: 20%;
     margin-left: auto;
     margin-right: auto;
+}
+
+#is_manager_section {
+    position: relative;
+}
+
+#is_manager_section label {
+    font-weight: normal;
+    display: inline;
+    position: absolute;
+    top: 5px;
+    left: 25px;
+}
+
+#manager_estimation {
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-left: 0px;
+    width: 20px;
+    height: 20px;
 }

@@ -2,7 +2,13 @@
   <div>
     <form>
       <label for="estimation_time">Estimation Time</label>
-      <input class="js-checklist-title js-autofocus" type="text" name="estimation[developer_time]" id="estimation_time" value="">
+      <input class="js-checklist-title js-autofocus" type="text" name="estimation[developer_time]" id="estimation_time"
+             value="">
+
+      <div id="is_manager_section">
+        <input id="manager_estimation" type="checkbox" name="vehicle" value="Bike"> <label for="manager_estimation"> Manager Estimation? </label>
+      </div>
+
       <div id="estimation_dialog_btn_section">
         <a id="estimation_modal_btn" type="submit" class="button-link confirm js-add-checklist" href="#"> Add </a>
       </div>

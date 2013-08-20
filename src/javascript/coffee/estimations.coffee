@@ -1,4 +1,6 @@
 ajaxCalls = []
+serverURL = "http://estimation-fi.herokuapp.com"
+
 cardDetailsIsOpen = ()->
   document.URL.indexOf("trello.com/card/") >= 0
 
@@ -36,7 +38,7 @@ loadCode = ()->
       is_manager: $("#manager_estimation").prop('checked')
 
   sendEstimation = ()->
-    ajaxCalls.push $.ajax "http://localhost:3000/estimations",
+    ajaxCalls.push $.ajax "#{serverURL}/estimations",
                           method: "post"
                           data:
                             estimation: buildEstimationObject()
@@ -46,6 +48,9 @@ loadCode = ()->
                             createDisplayEstimations()
                             $("#estimation_time").val("")
                             $("#estimation_dialog").dialog("close")
+                          error: (jqXHR, textStatus, errorThrown)->
+                            alert "You don't have manager's privilege"
+
 
   bindEstimationModalEvents=()->
     $("#estimation_modal_btn").click (e)->
@@ -90,7 +95,7 @@ loadCode = ()->
       cardInProgress(total_worked)
 
   populateEstimationSection = ()->
-    ajaxCalls.push $.ajax "http://localhost:3000/estimations",
+    ajaxCalls.push $.ajax "#{serverURL}/estimations",
                           data:
                             boardId: getBoardId()
                             cardId: getCardId()
@@ -100,7 +105,7 @@ loadCode = ()->
                                 total + estimation.user_time
                               else
                                 total
-                              ), 0
+                            ), 0
 
                             loadEstimationTimeTrackerBar(response.total_tracked_time, total_estimation)
 

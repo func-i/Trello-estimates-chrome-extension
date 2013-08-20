@@ -5,7 +5,7 @@ cardDetailsIsOpen = ()->
   document.URL.indexOf("trello.com/card/") >= 0
 
 loadCode = ()->
-  cardPattern = /^https:\/\/trello.com\/card\/(\S+)\/(\S+)\/(\d+)$/
+  cardPattern = /^https:\/\/trello.com\/c\/(\S+)\/(\S+)\/(\d+)$/
   userNamePattern = /^\(\S*\)/
 
   matchPattern = (string, pattern)->

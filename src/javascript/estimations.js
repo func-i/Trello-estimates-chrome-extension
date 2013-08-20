@@ -13,7 +13,7 @@
   loadCode = function() {
     var bindEstimationModalEvents, buildEstimationObject, cardInProgress, cardPattern, cardUnderestimated, createCardEstimationButton, createCardEstimationModal, createDisplayEstimations, generateHTMLCode, getBoardId, getCardId, getUsername, loadEstimationTimeTrackerBar, matchPattern, populateEstimationSection, sendEstimation, setEstimationTime, userNamePattern;
 
-    cardPattern = /^https:\/\/trello.com\/card\/(\S+)\/(\S+)\/(\d+)$/;
+    cardPattern = /^https:\/\/trello.com\/c\/(\S+)\/(\S+)\/(\d+)$/;
     userNamePattern = /^\(\S*\)/;
     matchPattern = function(string, pattern) {
       return string.match(pattern);

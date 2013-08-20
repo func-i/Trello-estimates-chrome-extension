@@ -7,22 +7,22 @@
   serverURL = "http://estimation-fi.herokuapp.com";
 
   cardDetailsIsOpen = function() {
-    return document.URL.indexOf("trello.com/card/") >= 0;
+    return document.URL.indexOf("trello.com/c/") >= 0;
   };
 
   loadCode = function() {
     var bindEstimationModalEvents, buildEstimationObject, cardInProgress, cardPattern, cardUnderestimated, createCardEstimationButton, createCardEstimationModal, createDisplayEstimations, generateHTMLCode, getBoardId, getCardId, getUsername, loadEstimationTimeTrackerBar, matchPattern, populateEstimationSection, sendEstimation, setEstimationTime, userNamePattern;
 
-    cardPattern = /^https:\/\/trello.com\/c\/(\S+)\/(\S+)\/(\d+)$/;
+    cardPattern = /^https:\/\/trello.com\/c\/(\S+)\/(\S+)$/;
     userNamePattern = /^\(\S*\)/;
     matchPattern = function(string, pattern) {
       return string.match(pattern);
     };
     getBoardId = function() {
-      return matchPattern(document.URL, cardPattern)[2];
+      return matchPattern(document.URL, cardPattern)[1];
     };
     getCardId = function() {
-      return matchPattern(document.URL, cardPattern)[3];
+      return matchPattern(document.URL, cardPattern)[2];
     };
     getUsername = function() {
       var beginParenthesis, endParenthesis, userFullName;
@@ -61,6 +61,7 @@
           return $("#estimation_dialog").dialog("close");
         },
         error: function(jqXHR, textStatus, errorThrown) {
+          alert(textStatus);
           return alert("You don't have manager's privilege");
         }
       }));

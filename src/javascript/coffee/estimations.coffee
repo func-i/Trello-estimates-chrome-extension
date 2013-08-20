@@ -2,20 +2,20 @@ ajaxCalls = []
 serverURL = "http://estimation-fi.herokuapp.com"
 
 cardDetailsIsOpen = ()->
-  document.URL.indexOf("trello.com/card/") >= 0
+  document.URL.indexOf("trello.com/c/") >= 0
 
 loadCode = ()->
-  cardPattern = /^https:\/\/trello.com\/c\/(\S+)\/(\S+)\/(\d+)$/
+  cardPattern = /^https:\/\/trello.com\/c\/(\S+)\/(\S+)$/
   userNamePattern = /^\(\S*\)/
 
   matchPattern = (string, pattern)->
     string.match(pattern)
 
   getBoardId = ()->
-    matchPattern(document.URL, cardPattern)[2]
+    matchPattern(document.URL, cardPattern)[1]
 
   getCardId = ()->
-    matchPattern(document.URL, cardPattern)[3]
+    matchPattern(document.URL, cardPattern)[2]
 
   getUsername = ()->
     #TODO: REGEX NEEDS TO BE CHANGED LATER
@@ -49,6 +49,7 @@ loadCode = ()->
                             $("#estimation_time").val("")
                             $("#estimation_dialog").dialog("close")
                           error: (jqXHR, textStatus, errorThrown)->
+                            alert textStatus
                             alert "You don't have manager's privilege"
 
 

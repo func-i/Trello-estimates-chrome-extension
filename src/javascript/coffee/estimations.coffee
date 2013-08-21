@@ -11,11 +11,8 @@ loadCode = ()->
   matchPattern = (string, pattern)->
     string.match(pattern)
 
-  getBoardId = ()->
-    matchPattern(document.URL, cardPattern)[1]
-
   getCardId = ()->
-    matchPattern(document.URL, cardPattern)[2]
+    matchPattern(document.URL, cardPattern)[1]
 
   getUsername = ()->
     #TODO: REGEX NEEDS TO BE CHANGED LATER
@@ -31,7 +28,6 @@ loadCode = ()->
 
   buildEstimationObject = ()->
     estimation =
-      board_id: getBoardId()
       card_id: getCardId()
       user_time: $("#estimation_time").val()
       user_username: getUsername()
@@ -49,7 +45,6 @@ loadCode = ()->
                             $("#estimation_time").val("")
                             $("#estimation_dialog").dialog("close")
                           error: (jqXHR, textStatus, errorThrown)->
-                            alert textStatus
                             alert "You don't have manager's privilege"
 
 
@@ -98,7 +93,7 @@ loadCode = ()->
   populateEstimationSection = ()->
     ajaxCalls.push $.ajax "#{serverURL}/estimations",
                           data:
-                            boardId: getBoardId()
+#                            boardId: getBoardId()
                             cardId: getCardId()
                           success: (response)->
                             total_estimation = response.estimations.reduce ((total, estimation)->

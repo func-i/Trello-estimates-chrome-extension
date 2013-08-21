@@ -11,18 +11,15 @@
   };
 
   loadCode = function() {
-    var bindEstimationModalEvents, buildEstimationObject, cardInProgress, cardPattern, cardUnderestimated, createCardEstimationButton, createCardEstimationModal, createDisplayEstimations, generateHTMLCode, getBoardId, getCardId, getUsername, loadEstimationTimeTrackerBar, matchPattern, populateEstimationSection, sendEstimation, setEstimationTime, userNamePattern;
+    var bindEstimationModalEvents, buildEstimationObject, cardInProgress, cardPattern, cardUnderestimated, createCardEstimationButton, createCardEstimationModal, createDisplayEstimations, generateHTMLCode, getCardId, getUsername, loadEstimationTimeTrackerBar, matchPattern, populateEstimationSection, sendEstimation, setEstimationTime, userNamePattern;
 
     cardPattern = /^https:\/\/trello.com\/c\/(\S+)\/(\S+)$/;
     userNamePattern = /^\(\S*\)/;
     matchPattern = function(string, pattern) {
       return string.match(pattern);
     };
-    getBoardId = function() {
-      return matchPattern(document.URL, cardPattern)[1];
-    };
     getCardId = function() {
-      return matchPattern(document.URL, cardPattern)[2];
+      return matchPattern(document.URL, cardPattern)[1];
     };
     getUsername = function() {
       var beginParenthesis, endParenthesis, userFullName;
@@ -40,7 +37,6 @@
       var estimation;
 
       return estimation = {
-        board_id: getBoardId(),
         card_id: getCardId(),
         user_time: $("#estimation_time").val(),
         user_username: getUsername(),
@@ -61,7 +57,6 @@
           return $("#estimation_dialog").dialog("close");
         },
         error: function(jqXHR, textStatus, errorThrown) {
-          alert(textStatus);
           return alert("You don't have manager's privilege");
         }
       }));
@@ -124,7 +119,6 @@
     populateEstimationSection = function() {
       return ajaxCalls.push($.ajax("" + serverURL + "/estimations", {
         data: {
-          boardId: getBoardId(),
           cardId: getCardId()
         },
         success: function(response) {

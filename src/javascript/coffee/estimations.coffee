@@ -1,5 +1,5 @@
 ajaxCalls = []
-serverURL = "http://estimation-fi.herokuapp.com"
+serverURL = "http://localhost:3000"
 
 cardDetailsIsOpen = ()->
   document.URL.indexOf("trello.com/c/") >= 0
@@ -11,8 +11,10 @@ loadCode = ()->
   matchPattern = (string, pattern)->
     string.match(pattern)
 
-  getCardId = ()->
-    matchPattern(document.URL, cardPattern)[1]
+  getCardId = ()->    
+    cId = matchPattern(document.URL, cardPattern)[1]
+    console.log cId
+    cId
 
   getUsername = ()->
     #TODO: REGEX NEEDS TO BE CHANGED LATER
@@ -35,17 +37,17 @@ loadCode = ()->
 
   sendEstimation = ()->
     ajaxCalls.push $.ajax "#{serverURL}/estimations",
-                          method: "post"
-                          data:
-                            estimation: buildEstimationObject()
-                          async: false,
-                          success: (response)->
-                            $("#estimation_section").remove()
-                            createDisplayEstimations()
-                            $("#estimation_time").val("")
-                            $("#estimation_dialog").dialog("close")
-                          error: (jqXHR, textStatus, errorThrown)->
-                            alert "You don't have manager's privilege"
+      method: "post"
+      data:
+        estimation: buildEstimationObject()
+      async: false,
+      success: (response)->
+        $("#estimation_section").remove()
+        createDisplayEstimations()
+        $("#estimation_time").val("")
+        $("#estimation_dialog").dialog("close")
+      error: (jqXHR, textStatus, errorThrown)->
+        alert "You don't have manager's privilege"
 
 
   bindEstimationModalEvents=()->
@@ -57,23 +59,25 @@ loadCode = ()->
 
   createCardEstimationModal = ()->
     ajaxCalls.push $.ajax chrome.extension.getURL("src/html/estimation_modal.html"),
-                          dataType: 'html'
-                          success: (html)->
-                            $("body").append(html)
-                            bindEstimationModalEvents()
-                            $("#estimation_dialog").dialog
-                              autoOpen: false
-                              modal: true
-                              dialogClass: "estimation_custom_dialog"
-                              title: "Estimate time for this card"
+      dataType: 'html'
+      success: (html)->
+        $("body").append(html)
+        bindEstimationModalEvents()
+        $("#estimation_dialog").dialog
+          autoOpen: false
+          modal: true
+          dialogClass: "estimation_custom_dialog"
+          title: "Estimate time for this card"
+
   createCardEstimationButton = ()->
     ajaxCalls.push $.ajax chrome.extension.getURL("src/html/card_estimation_btn.html"),
-                          dataType: 'html'
-                          success: (html)->
-                            $(".other-actions").find(".clearfix").prepend(html)
-                            createCardEstimationModal() if $("#estimation_dialog").length == 0
-                            $(".js-add-estimation-menu").on "click", ()->
-                              $("#estimation_dialog").dialog("open")
+      dataType: 'html'
+      success: (html)->
+        $(".other-actions").find(".clearfix").prepend(html)
+        createCardEstimationModal() if $("#estimation_dialog").length == 0
+        $(".js-add-estimation-menu").on "click", ()->
+          $("#estimation_dialog").dialog("open")
+
 
   cardUnderestimated = ()->
     $("#estimation_progress").addClass("bar-danger")
@@ -92,38 +96,39 @@ loadCode = ()->
 
   populateEstimationSection = ()->
     ajaxCalls.push $.ajax "#{serverURL}/estimations",
-                          data:
-#                            boardId: getBoardId()
-                            cardId: getCardId()
-                          success: (response)->
-                            total_estimation = response.estimations.reduce ((total, estimation)->
-                              if estimation.is_manager == null || estimation.is_manager == false
-                                total + estimation.user_time
-                              else
-                                total
-                            ), 0
+      data:
+        # boardId: getBoardId()
+        cardId: getCardId()
+        member_name: getUsername()
+      success: (response)->
+        total_estimation = response.estimations.reduce ((total, estimation)->
+          if estimation.is_manager == null || estimation.is_manager == false
+            total + estimation.user_time
+          else
+            total
+        ), 0
 
-                            loadEstimationTimeTrackerBar(response.total_tracked_time, total_estimation)
+        loadEstimationTimeTrackerBar(response.total_tracked_time, total_estimation)
 
-                            for estimation in response.estimations
-                              is_manager = ""
-                              is_manager = "(M)" if estimation.is_manager
+        for estimation in response.estimations
+          is_manager = ""
+          is_manager = "(M)" if estimation.is_manager
 
-                              html = "<tr><td>#{is_manager} #{estimation.user_name}</td><td>#{estimation.user_time}</td></tr>"
-                              $(".estimations").find("tbody").append(html)
+          html = "<tr><td>#{is_manager} #{estimation.user_name}</td><td>#{estimation.user_time}</td></tr>"
+          $(".estimations").find("tbody").append(html)
 
-                            $("#floatingCirclesG").hide()
-                            $("#estimations_content").show()
+        $("#floatingCirclesG").hide()
+        $("#estimations_content").show()
 
-                            $("#estimated_time_span").text("Estimated Time: #{total_estimation}")
-                            $("#tracked_time_span").text("Tracked Time: #{response.total_tracked_time}")
+        $("#estimated_time_span").text("Estimated Time: #{total_estimation}")
+        $("#tracked_time_span").text("Tracked Time: #{response.total_tracked_time}")
 
   createDisplayEstimations = ()->
     ajaxCalls.push $.ajax chrome.extension.getURL("src/html/estimations.html"),
-                          dataType: 'html'
-                          success: (html)->
-                            $(".card-detail-metadata").prepend(html)
-                            populateEstimationSection()
+      dataType: 'html'
+      success: (html)->
+        $(".card-detail-metadata").prepend(html)
+        populateEstimationSection()
 
   generateHTMLCode = ()->
     createCardEstimationButton()
@@ -136,4 +141,3 @@ chrome.runtime.onMessage.addListener (message, sender, sendResponse)->
     for ajaxCall in ajaxCalls
       ajaxCall.abort()
     loadCode()
-

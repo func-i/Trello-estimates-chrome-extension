@@ -3,7 +3,7 @@
 
   ajaxCalls = [];
 
-  serverURL = "http://localhost:3000";
+  serverURL = "http://estimation-fi.herokuapp.com/";
 
   cardDetailsIsOpen = function() {
     return document.URL.indexOf("trello.com/c/") >= 0;
@@ -17,10 +17,7 @@
       return string.match(pattern);
     };
     getCardId = function() {
-      var cId;
-      cId = matchPattern(document.URL, cardPattern)[1];
-      console.log(cId);
-      return cId;
+      return matchPattern(document.URL, cardPattern)[1];
     };
     getUsername = function() {
       var beginParenthesis, endParenthesis, userFullName;

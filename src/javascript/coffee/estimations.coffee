@@ -1,5 +1,6 @@
 ajaxCalls = []
-serverURL = "http://localhost:3000"
+serverURL = "http://estimation-fi.herokuapp.com/"
+#serverURL = "http://localhost:3000/"
 
 cardDetailsIsOpen = ()->
   document.URL.indexOf("trello.com/c/") >= 0
@@ -12,9 +13,7 @@ loadCode = ()->
     string.match(pattern)
 
   getCardId = ()->    
-    cId = matchPattern(document.URL, cardPattern)[1]
-    console.log cId
-    cId
+    matchPattern(document.URL, cardPattern)[1]
 
   getUsername = ()->
     #TODO: REGEX NEEDS TO BE CHANGED LATER
@@ -29,7 +28,7 @@ loadCode = ()->
     $("#estimation_time").val(time)
 
   buildEstimationObject = ()->
-    estimation =
+    estimation =     
       card_id: getCardId()
       user_time: $("#estimation_time").val()
       user_username: getUsername()
@@ -97,7 +96,6 @@ loadCode = ()->
   populateEstimationSection = ()->
     ajaxCalls.push $.ajax "#{serverURL}/estimations",
       data:
-        # boardId: getBoardId()
         cardId: getCardId()
         member_name: getUsername()
       success: (response)->

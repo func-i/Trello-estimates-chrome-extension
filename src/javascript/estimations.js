@@ -4,7 +4,7 @@
 
   ajaxCalls = [];
 
-  serverURL = "http://localhost:3000";
+  serverURL = "https://localhost:3000";
 
   cardDetailsIsOpen = function() {
     return document.URL.indexOf("trello.com/c/") >= 0;
@@ -141,8 +141,8 @@
           }
           $("#floatingCirclesG").hide();
           $("#estimations_content").show();
-          $("#estimated_time_span").text("Estimated Time: " + total_estimation);
-          return $("#tracked_time_span").text("Tracked Time: " + response.total_tracked_time);
+          $("#estimated_time_span").text("Estimated Time: " + total_estimation).css("font-weight", "bold");
+          return $("#tracked_time_span").text("Tracked Time: " + response.total_tracked_time).css("font-weight", "bold");
         }
       }));
     };

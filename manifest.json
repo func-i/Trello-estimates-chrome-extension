@@ -7,7 +7,7 @@
 
   "permissions": [
     "tabs",
-    "https://localhost:3000/estimations",
+    "http://localhost:3000/estimations",
     "http://estimation-fi.herokuapp.com/estimations"
   ],
 

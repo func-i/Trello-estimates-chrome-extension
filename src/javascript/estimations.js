@@ -4,7 +4,7 @@
 
   ajaxCalls = [];
 
-  serverURL = "https://localhost:3000";
+  serverURL = "http://localhost:3000";
 
   cardDetailsIsOpen = function() {
     return document.URL.indexOf("trello.com/c/") >= 0;

@@ -1,6 +1,6 @@
 ajaxCalls = []
 # serverURL = "http://estimation-fi.herokuapp.com/"
-serverURL = "https://localhost:3000"
+serverURL = "http://localhost:3000"
 
 cardDetailsIsOpen = ()->
   document.URL.indexOf("trello.com/c/") >= 0

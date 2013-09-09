@@ -1,6 +1,6 @@
 ajaxCalls = []
 # serverURL = "http://estimation-fi.herokuapp.com/"
-serverURL = "http://localhost:3000/"
+serverURL = "http://localhost:3000"
 
 cardDetailsIsOpen = ()->
   document.URL.indexOf("trello.com/c/") >= 0
@@ -36,7 +36,8 @@ loadCode = ()->
 
   sendEstimation = ()->
     ajaxCalls.push $.ajax "#{serverURL}/estimations",
-      method: "post"
+      method: "post",
+      dataType: "json",
       data:
         estimation: buildEstimationObject()
       async: false,

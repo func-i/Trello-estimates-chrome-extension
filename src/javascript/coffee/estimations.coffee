@@ -1,6 +1,6 @@
 ajaxCalls = []
-serverURL = "http://estimation-fi.herokuapp.com/"
-#serverURL = "http://localhost:3000/"
+# serverURL = "http://estimation-fi.herokuapp.com/"
+serverURL = "http://localhost:3000"
 
 cardDetailsIsOpen = ()->
   document.URL.indexOf("trello.com/c/") >= 0
@@ -12,7 +12,7 @@ loadCode = ()->
   matchPattern = (string, pattern)->
     string.match(pattern)
 
-  getCardId = ()->    
+  getCardId = ()->
     matchPattern(document.URL, cardPattern)[1]
 
   getUsername = ()->
@@ -28,7 +28,7 @@ loadCode = ()->
     $("#estimation_time").val(time)
 
   buildEstimationObject = ()->
-    estimation =     
+    estimation =
       card_id: getCardId()
       user_time: $("#estimation_time").val()
       user_username: getUsername()
@@ -36,7 +36,8 @@ loadCode = ()->
 
   sendEstimation = ()->
     ajaxCalls.push $.ajax "#{serverURL}/estimations",
-      method: "post"
+      method: "post",
+      dataType: "json",
       data:
         estimation: buildEstimationObject()
       async: false,
@@ -118,8 +119,14 @@ loadCode = ()->
         $("#floatingCirclesG").hide()
         $("#estimations_content").show()
 
-        $("#estimated_time_span").text("Estimated Time: #{total_estimation}")
-        $("#tracked_time_span").text("Tracked Time: #{response.total_tracked_time}")
+        $("#estimated_time_span")
+          .text("Estimated Time: #{total_estimation}")
+          .css("font-weight", "bold")
+
+        $("#tracked_time_span")
+          .text("Tracked Time: #{response.total_tracked_time}")
+          .css("font-weight", "bold")
+
 
   createDisplayEstimations = ()->
     ajaxCalls.push $.ajax chrome.extension.getURL("src/html/estimations.html"),

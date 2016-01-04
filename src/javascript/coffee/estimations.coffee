@@ -1,6 +1,6 @@
 ajaxCalls = []
-# serverURL = "http://estimation-fi.herokuapp.com/"
-serverURL = "http://estimation-fi.herokuapp.com"
+# serverURL = "http://estimation-fi.herokuapp.com"
+serverURL = "https://localhost:5000"
 
 cardDetailsIsOpen = ()->
   document.URL.indexOf("trello.com/c/") >= 0
@@ -17,7 +17,7 @@ loadCode = ()->
 
   getUsername = ()->
     #TODO: REGEX NEEDS TO BE CHANGED LATER
-    userFullName = $.trim($(".header-auth").find(".member-avatar").attr("title"))
+    userFullName = $.trim($(".header-member").find(".member-initials").attr("title"))
     #  matchPattern(userFullName, userNamePattern)
     beginParenthesis = userFullName.lastIndexOf("(")
     endParenthesis = userFullName.lastIndexOf(")")

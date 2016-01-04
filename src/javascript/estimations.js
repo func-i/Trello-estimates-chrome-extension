@@ -3,7 +3,8 @@
 
   ajaxCalls = [];
 
-  serverURL = "http://estimation-fi.herokuapp.com";
+  // serverURL = "http://estimation-fi.herokuapp.com";
+  serverURL = "https://localhost:5000";
 
   cardDetailsIsOpen = function() {
     return document.URL.indexOf("trello.com/c/") >= 0;
@@ -21,7 +22,7 @@
     };
     getUsername = function() {
       var beginParenthesis, endParenthesis, userFullName;
-      userFullName = $.trim($(".header-auth").find(".member-avatar").attr("title"));
+      userFullName = $.trim($(".header-member").find(".member-initials").attr("title"));
       beginParenthesis = userFullName.lastIndexOf("(");
       endParenthesis = userFullName.lastIndexOf(")");
       userFullName = userFullName.substr(beginParenthesis + 1);

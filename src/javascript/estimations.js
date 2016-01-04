@@ -86,7 +86,7 @@
       return ajaxCalls.push($.ajax(chrome.extension.getURL("src/html/card_estimation_btn.html"), {
         dataType: 'html',
         success: function(html) {
-          $(".other-actions").find(".clearfix").prepend(html);
+          $(".other-actions").find(".u-clearfix").prepend(html);
           if ($("#estimation_dialog").length === 0) {
             createCardEstimationModal();
           }

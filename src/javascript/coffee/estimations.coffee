@@ -73,7 +73,7 @@ loadCode = ()->
     ajaxCalls.push $.ajax chrome.extension.getURL("src/html/card_estimation_btn.html"),
       dataType: 'html'
       success: (html)->
-        $(".other-actions").find(".clearfix").prepend(html)
+        $(".other-actions").find(".u-clearfix").prepend(html)
         createCardEstimationModal() if $("#estimation_dialog").length == 0
         $(".js-add-estimation-menu").on "click", ()->
           $("#estimation_dialog").dialog("open")

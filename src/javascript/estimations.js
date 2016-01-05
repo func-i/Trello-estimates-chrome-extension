@@ -86,7 +86,13 @@
       return ajaxCalls.push($.ajax(chrome.extension.getURL("src/html/card_estimation_btn.html"), {
         dataType: 'html',
         success: function(html) {
-          $(".other-actions").find(".u-clearfix").prepend(html);
+          var actions, sidebar;
+          sidebar = $(".window-sidebar");
+          actions = sidebar.children(".other-actions");
+          if (actions.length === 0) {
+            actions = sidebar.children(".window-module").eq(0);
+          }
+          actions.children(".u-clearfix").prepend(html);
           if ($("#estimation_dialog").length === 0) {
             createCardEstimationModal();
           }

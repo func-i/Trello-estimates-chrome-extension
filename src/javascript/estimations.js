@@ -54,8 +54,8 @@
           $("#estimation_time").val("");
           return $("#estimation_dialog").dialog("close");
         },
-        error: function(jqXHR, textStatus, errorThrown) {
-          return alert("Error: " + textStatus + " - " + errorThrown);
+        error: function(jqXHR) {
+          return alert("Error: " + jqXHR.responseText);
         }
       }));
     };

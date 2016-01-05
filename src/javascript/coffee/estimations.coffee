@@ -46,8 +46,8 @@ loadCode = ()->
         createDisplayEstimations()
         $("#estimation_time").val("")
         $("#estimation_dialog").dialog("close")
-      error: (jqXHR, textStatus, errorThrown)->
-        alert "Error: #{textStatus} - #{errorThrown}"
+      error: (jqXHR)->
+        alert "Error: #{jqXHR.responseText}"
 
   bindEstimationModalEvents = ()->
     $("#estimation_modal_btn").click (e)->

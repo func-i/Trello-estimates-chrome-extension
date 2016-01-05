@@ -55,7 +55,7 @@
           return $("#estimation_dialog").dialog("close");
         },
         error: function(jqXHR, textStatus, errorThrown) {
-          return alert("You don't have manager's privilege");
+          return alert("Error: " + textStatus + " - " + errorThrown);
         }
       }));
     };
@@ -150,7 +150,7 @@
       return ajaxCalls.push($.ajax(chrome.extension.getURL("src/html/estimations.html"), {
         dataType: 'html',
         success: function(html) {
-          $(".card-detail-metadata").prepend(html);
+          $(".card-detail-data").prepend(html);
           return populateEstimationSection();
         }
       }));

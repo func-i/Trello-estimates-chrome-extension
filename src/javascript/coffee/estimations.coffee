@@ -47,10 +47,9 @@ loadCode = ()->
         $("#estimation_time").val("")
         $("#estimation_dialog").dialog("close")
       error: (jqXHR, textStatus, errorThrown)->
-        alert "You don't have manager's privilege"
+        alert "Error: #{textStatus} - #{errorThrown}"
 
-
-  bindEstimationModalEvents=()->
+  bindEstimationModalEvents = ()->
     $("#estimation_modal_btn").click (e)->
       e.preventDefault()
       e.stopPropagation()
@@ -132,7 +131,7 @@ loadCode = ()->
     ajaxCalls.push $.ajax chrome.extension.getURL("src/html/estimations.html"),
       dataType: 'html'
       success: (html)->
-        $(".card-detail-metadata").prepend(html)
+        $(".card-detail-data").prepend(html)
         populateEstimationSection()
 
   generateHTMLCode = ()->

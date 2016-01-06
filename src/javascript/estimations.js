@@ -147,8 +147,8 @@
           }
           $("#floatingCirclesG").hide();
           $("#estimations_content").show();
-          $("#estimated_time_span").text("Estimated Time: " + total_estimation).css("font-weight", "bold");
-          return $("#tracked_time_span").text("Tracked Time: " + response.total_tracked_time).css("font-weight", "bold");
+          $("#estimated_time_span").text("Estimated Total: " + total_estimation).css("font-weight", "bold");
+          return $("#tracked_time_span").text("Tracked Total: " + response.total_tracked_time).css("font-weight", "bold");
         }
       }));
     };

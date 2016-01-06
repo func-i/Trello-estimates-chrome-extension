@@ -125,11 +125,11 @@ loadCode = ()->
         $("#estimations_content").show()
 
         $("#estimated_time_span")
-          .text("Estimated Time: #{total_estimation}")
+          .text("Estimated Total: #{total_estimation}")
           .css("font-weight", "bold")
 
         $("#tracked_time_span")
-          .text("Tracked Time: #{response.total_tracked_time}")
+          .text("Tracked Total: #{response.total_tracked_time}")
           .css("font-weight", "bold")
 
 

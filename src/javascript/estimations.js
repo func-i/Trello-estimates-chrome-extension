@@ -37,7 +37,7 @@
         card_id: getCardId(),
         user_time: $("#estimation_time").val(),
         user_username: getUsername(),
-        is_manager: $("#manager_estimation").prop('checked')
+        is_manager: false
       };
     };
     sendEstimation = function() {

@@ -11,14 +11,18 @@
   border: 1px solid #1c506e;
 }
 
+.estimation_custom_dialog .ui-dialog-titlebar-close {
+  margin-top: -18px;
+}
+
 #estimation_dialog_btn_section {
   text-align: center;
 }
 
 #estimation_dialog_btn_section .button-link {
   width: 20%;
-  margin-left: auto;
-  margin-right: auto;
+/*  margin-left: auto;
+  margin-right: auto;*/
 }
 
 #is_manager_section {

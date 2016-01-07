@@ -2,27 +2,37 @@ ajaxCalls = []
 # serverURL = "http://estimation-fi.herokuapp.com"
 serverURL = "https://localhost:5000"
 
+abortAjaxCalls = ()->
+  for ajaxCall in ajaxCalls
+    ajaxCall.abort()
+
+boardIsOpen = ()->
+  document.URL.indexOf("trello.com/b/") >= 0
+
 cardDetailsIsOpen = ()->
   document.URL.indexOf("trello.com/c/") >= 0
 
-loadCode = ()->
+matchPattern = (string, pattern)->
+  string.match(pattern)
+
+getUsername = ()->
+  #TODO: REGEX NEEDS TO BE CHANGED LATER
+  userFullName = $.trim($(".header-member").find(".member-initials").attr("title"))
+  #  matchPattern(userFullName, userNamePattern)
+  beginParenthesis = userFullName.lastIndexOf("(")
+  endParenthesis = userFullName.lastIndexOf(")")
+  userFullName = userFullName.substr(beginParenthesis + 1)
+  userFullName.substr(0, userFullName.length - 1)
+
+loadBoard = ()->
+  console.log("loadBoard")
+
+loadCard = ()->
   cardPattern = /^https:\/\/trello.com\/c\/(\S+)\/(\S+)$/
   userNamePattern = /^\(\S*\)/
 
-  matchPattern = (string, pattern)->
-    string.match(pattern)
-
   getCardId = ()->
     matchPattern(document.URL, cardPattern)[1]
-
-  getUsername = ()->
-    #TODO: REGEX NEEDS TO BE CHANGED LATER
-    userFullName = $.trim($(".header-member").find(".member-initials").attr("title"))
-    #  matchPattern(userFullName, userNamePattern)
-    beginParenthesis = userFullName.lastIndexOf("(")
-    endParenthesis = userFullName.lastIndexOf(")")
-    userFullName = userFullName.substr(beginParenthesis + 1)
-    userFullName.substr(0, userFullName.length - 1)
 
   setEstimationTime = (time)->
     $("#estimation_time").val(time)
@@ -147,8 +157,12 @@ loadCode = ()->
 
   generateHTMLCode()
 
+
 chrome.runtime.onMessage.addListener (message, sender, sendResponse)->
+  if boardIsOpen()
+    abortAjaxCalls
+    loadBoard()
+
   if cardDetailsIsOpen() && $(".js-add-estimation-menu").length == 0
-    for ajaxCall in ajaxCalls
-      ajaxCall.abort()
-    loadCode()
+    abortAjaxCalls
+    loadCard()

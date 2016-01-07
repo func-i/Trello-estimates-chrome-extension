@@ -2,6 +2,10 @@ ajaxCalls = []
 # serverURL = "http://estimation-fi.herokuapp.com"
 serverURL = "https://localhost:5000"
 
+boardPattern  = /^https:\/\/trello.com\/b\/(\S+)\/(\S+)$/
+cardPattern   = /^https:\/\/trello.com\/c\/(\S+)\/(\S+)$/
+
+
 abortAjaxCalls = ()->
   for ajaxCall in ajaxCalls
     ajaxCall.abort()
@@ -12,34 +16,36 @@ boardIsOpen = ()->
 cardDetailsIsOpen = ()->
   document.URL.indexOf("trello.com/c/") >= 0
 
-matchPattern = (string, pattern)->
-  string.match(pattern)
+# target is board or card
+getTargetId = (targetPattern)->
+  document.URL.match(targetPattern)[1]
 
 getUsername = ()->
-  #TODO: REGEX NEEDS TO BE CHANGED LATER
   userFullName = $.trim($(".header-member").find(".member-initials").attr("title"))
-  #  matchPattern(userFullName, userNamePattern)
   beginParenthesis = userFullName.lastIndexOf("(")
   endParenthesis = userFullName.lastIndexOf(")")
   userFullName = userFullName.substr(beginParenthesis + 1)
   userFullName.substr(0, userFullName.length - 1)
 
 loadBoard = ()->
-  console.log("loadBoard")
+  getCardsOnBoard = ()->
+    ajaxCalls.push $.ajax "#{serverURL}/estimations",
+      data:
+        board_id: getTargetId(boardPattern)
+        member_name: getUsername()
+      success: (response)->
+        console.log(response)
+
+  getCardsOnBoard()
+
 
 loadCard = ()->
-  cardPattern = /^https:\/\/trello.com\/c\/(\S+)\/(\S+)$/
-  userNamePattern = /^\(\S*\)/
-
-  getCardId = ()->
-    matchPattern(document.URL, cardPattern)[1]
-
   setEstimationTime = (time)->
     $("#estimation_time").val(time)
 
   buildEstimationObject = ()->
     estimation =
-      card_id: getCardId()
+      card_id: getTargetId(cardPattern)
       user_time: $("#estimation_time").val()
       user_username: getUsername()
       # is_manager: $("#manager_estimation").prop('checked')
@@ -94,7 +100,6 @@ loadCard = ()->
         $(".js-add-estimation-menu").on "click", ()->
           $("#estimation_dialog").dialog("open")
 
-
   cardUnderestimated = ()->
     $("#estimation_progress").addClass("bar-danger")
     $("#estimation_progress").css("width", "100%")
@@ -113,7 +118,7 @@ loadCard = ()->
   populateEstimationSection = ()->
     ajaxCalls.push $.ajax "#{serverURL}/estimations",
       data:
-        cardId: getCardId()
+        card_id: getTargetId(cardPattern)
         member_name: getUsername()
       success: (response)->
         total_estimation = response.estimations.reduce ((total, estimation)->
@@ -142,7 +147,6 @@ loadCard = ()->
         $("#tracked_time_span")
           .text("Tracked Total: #{response.total_tracked_time}")
           .css("font-weight", "bold")
-
 
   createDisplayEstimations = ()->
     ajaxCalls.push $.ajax chrome.extension.getURL("src/html/estimations.html"),

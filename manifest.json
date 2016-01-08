@@ -29,8 +29,8 @@
         "/src/stylesheet/vendor/ui-lightness/jquery-ui-1.10.3.custom.min.css",
         "/src/stylesheet/vendor/bootstrap.min.css",
         "/src/stylesheet/board.css",
-        "/src/stylesheet/estimations.css",
-        "/src/stylesheet/spinner.css"
+        "/src/stylesheet/card.css",
+        "/src/stylesheet/card_spinner.css"
       ],
       "js": [
         "/src/javascript/vendors/jquery-1.10.1.min.js",

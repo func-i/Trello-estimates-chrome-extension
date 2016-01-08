@@ -1,43 +1,7 @@
-ajaxCalls = []
-# serverURL = "http://estimation-fi.herokuapp.com"
-serverURL = "https://localhost:5000"
-
-boardPattern  = /^https:\/\/trello.com\/b\/(\S+)\/(\S+)$/
 cardPattern   = /^https:\/\/trello.com\/c\/(\S+)\/(\S+)$/
-
-
-abortAjaxCalls = ()->
-  for ajaxCall in ajaxCalls
-    ajaxCall.abort()
-
-boardIsOpen = ()->
-  document.URL.indexOf("trello.com/b/") >= 0
 
 cardDetailsIsOpen = ()->
   document.URL.indexOf("trello.com/c/") >= 0
-
-# target is board or card
-getTargetId = (targetPattern)->
-  document.URL.match(targetPattern)[1]
-
-getUsername = ()->
-  userFullName = $.trim($(".header-member").find(".member-initials").attr("title"))
-  beginParenthesis = userFullName.lastIndexOf("(")
-  endParenthesis = userFullName.lastIndexOf(")")
-  userFullName = userFullName.substr(beginParenthesis + 1)
-  userFullName.substr(0, userFullName.length - 1)
-
-loadBoard = ()->
-  getCardsOnBoard = ()->
-    ajaxCalls.push $.ajax "#{serverURL}/estimations",
-      data:
-        board_id: getTargetId(boardPattern)
-        member_name: getUsername()
-      success: (response)->
-        console.log(response)
-
-  getCardsOnBoard()
-
 
 loadCard = ()->
   setEstimationTime = (time)->
@@ -160,13 +124,3 @@ loadCard = ()->
     createDisplayEstimations()
 
   generateHTMLCode()
-
-
-chrome.runtime.onMessage.addListener (message, sender, sendResponse)->
-  if boardIsOpen()
-    abortAjaxCalls
-    loadBoard()
-
-  if cardDetailsIsOpen() && $(".js-add-estimation-menu").length == 0
-    abortAjaxCalls
-    loadCard()

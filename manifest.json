@@ -34,7 +34,10 @@
       "js": [
         "/src/javascript/vendors/jquery-1.10.1.min.js",
         "/src/javascript/vendors/jquery-ui-1.10.3.custom.min.js",
-        "/src/javascript/estimations.js"
+        "/src/javascript/shared.js",
+        "/src/javascript/board.js",
+        "/src/javascript/card.js",
+        "/src/javascript/main.js"
       ]
     }
   ],

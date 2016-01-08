@@ -14,6 +14,20 @@
 
   boardCards = {};
 
+  compareCardStats = function(oldCards, newCards) {
+    var diffCards, id, oldStats, stats;
+    diffCards = {};
+    for (id in newCards) {
+      stats = newCards[id];
+      oldStats = oldCards[id];
+      if (!oldStats || oldStats.estimate !== stats.estimate || oldStats.tracked !== stats.tracked) {
+        diffCards[id] = stats;
+      }
+    }
+    console.log(diffCards);
+    return diffCards;
+  };
+
   cardStatsHtml = function(stats) {
     var html;
     html = "";
@@ -40,7 +54,7 @@
       statsHtml = cardStatsHtml(stats);
       if (statsDiv.length === 0) {
         statsHtml = "<div class='card-fi-stats'>" + statsHtml + "</div>";
-        _results.push(cardTitle.append(statsHtml));
+        _results.push(cardTitle.after(statsHtml));
       } else {
         _results.push(statsDiv.empty().append(statsHtml));
       }
@@ -48,29 +62,12 @@
     return _results;
   };
 
-  compareCardStats = function(oldCards, newCards) {
-    var newId, newStats, oldStats, _results;
-    _results = [];
-    for (newId in newCards) {
-      newStats = newCards[newId];
-      _results.push(oldStats = oldCards[newId]);
-    }
-    return _results;
-  };
-
   updateCards = function(response) {
-    return showUpdatedStats({
-      "59Ye2V1l": {
-        estimate: 4.5,
-        tracked: 1.2
-      },
-      "UOggq4d8": {
-        estimate: 3.2
-      },
-      "5NbyoIDi": {
-        tracked: 4.8
-      }
-    });
+    var diffCards, oldCards;
+    oldCards = JSON.parse(JSON.stringify(boardCards));
+    boardCards = response;
+    diffCards = compareCardStats(oldCards, boardCards);
+    return showUpdatedStats(diffCards);
   };
 
   getCardsOnBoard = function() {

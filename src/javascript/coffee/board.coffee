@@ -7,6 +7,19 @@ boardPattern  = /^https:\/\/trello.com\/b\/(\S+)\/(\S+)$/
 
 boardCards = {}
 
+# compare the estimated/tracked times from server with the cards' stats
+# on client side. return the cards whose stats have changed
+compareCardStats = (oldCards, newCards)->
+  diffCards = {}
+  for id, stats of newCards
+    oldStats = oldCards[id]
+
+    if !oldStats || 
+       oldStats.estimate != stats.estimate || oldStats.tracked != stats.tracked
+      diffCards[id] = stats
+  console.log(diffCards)
+  diffCards
+
 cardStatsHtml = (stats)->
   html = ""
   if stats.estimate
@@ -27,32 +40,15 @@ showUpdatedStats = (cards)->
 
     if statsDiv.length == 0
       statsHtml = "<div class='card-fi-stats'>" + statsHtml + "</div>"
-      cardTitle.append(statsHtml)
+      cardTitle.after(statsHtml)
     else
       statsDiv.empty().append(statsHtml)
-
-# compare the estimated/tracked times from server with the cards' stats
-# on client side. return the cards whose stats have changed 
-compareCardStats = (oldCards, newCards)->
-  for newId, newStats of newCards
-    oldStats = oldCards[newId]
-    # if !oldStats || 
-
   
 updateCards = (response)->
-  # oldCards    = JSON.parse(JSON.stringify(boardCards))
-  # boardCards  = response
-  # diffCards   = compareCardStats(oldCards, boardCards)
-  # showUpdatedStats(diffCards)
-  showUpdatedStats(
-    "59Ye2V1l":
-      estimate: 4.5
-      tracked: 1.2
-    "UOggq4d8":
-      estimate: 3.2
-    "5NbyoIDi":
-      tracked: 4.8
-  )
+  oldCards    = JSON.parse(JSON.stringify(boardCards))
+  boardCards  = response
+  diffCards   = compareCardStats(oldCards, boardCards)
+  showUpdatedStats(diffCards)
 
 getCardsOnBoard = ()->
   ajaxCalls.push $.ajax "#{serverURL}/estimations",

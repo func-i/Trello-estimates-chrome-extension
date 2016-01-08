@@ -4,6 +4,9 @@ window.trelloEstimationApp =
 
   ajaxCalls: []
 
+  ajaxErrorAlert: (jqXHR)->
+    alert "Error: #{jqXHR.responseText}"
+
   abortAjaxCalls: ()->
     for ajaxCall in this.ajaxCalls
       ajaxCall.abort()

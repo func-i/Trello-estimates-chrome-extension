@@ -1,6 +1,7 @@
 app = window.trelloEstimationApp
-serverURL = app.serverURL
-ajaxCalls = app.ajaxCalls
+serverURL       = app.serverURL
+ajaxCalls       = app.ajaxCalls
+ajaxErrorAlert  = app.ajaxErrorAlert
 
 cardPattern = /^https:\/\/trello.com\/c\/(\S+)\/(\S+)$/
 
@@ -26,8 +27,7 @@ sendEstimation = ()->
       estimation: buildEstimationObject()
     async: false
     success: closeEstimationModal
-    error: (jqXHR)->
-      alert "Error: #{jqXHR.responseText}"
+    error: ajaxErrorAlert
 
 bindEstimationModalEvents = ()->
   $("#estimation_modal_btn").click (e)->
@@ -122,6 +122,7 @@ getEstimations = ()->
       card_id: app.getTargetId(cardPattern)
       member_name: app.getUsername()
     success: populateEstimationSection
+    error: ajaxErrorAlert
 
 loadEstimationsList = ()->
   ajaxCalls.push $.ajax chrome.extension.getURL("src/html/estimations.html"),
@@ -138,4 +139,3 @@ app.cardIsOpen = ()->
 app.loadCard = ()->
   loadEstimationButton()
   loadEstimationsList()
-

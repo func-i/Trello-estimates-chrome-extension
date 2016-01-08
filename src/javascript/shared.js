@@ -4,6 +4,9 @@
   window.trelloEstimationApp = {
     serverURL: "https://localhost:5000",
     ajaxCalls: [],
+    ajaxErrorAlert: function(jqXHR) {
+      return alert("Error: " + jqXHR.responseText);
+    },
     abortAjaxCalls: function() {
       var ajaxCall, _i, _len, _ref, _results;
       _ref = this.ajaxCalls;

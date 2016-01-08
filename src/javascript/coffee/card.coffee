@@ -1,17 +1,21 @@
+app = window.trelloEstimationApp
+serverURL = app.serverURL
+ajaxCalls = app.ajaxCalls
+
 cardPattern   = /^https:\/\/trello.com\/c\/(\S+)\/(\S+)$/
 
-cardDetailsIsOpen = ()->
+app.cardIsOpen = ()->
   document.URL.indexOf("trello.com/c/") >= 0
 
-loadCard = ()->
+app.loadCard = ()->
   setEstimationTime = (time)->
     $("#estimation_time").val(time)
 
   buildEstimationObject = ()->
     estimation =
-      card_id: getTargetId(cardPattern)
+      card_id: app.getTargetId(cardPattern)
       user_time: $("#estimation_time").val()
-      user_username: getUsername()
+      user_username: app.getUsername()
       # is_manager: $("#manager_estimation").prop('checked')
       is_manager: false
 
@@ -82,8 +86,8 @@ loadCard = ()->
   populateEstimationSection = ()->
     ajaxCalls.push $.ajax "#{serverURL}/estimations",
       data:
-        card_id: getTargetId(cardPattern)
-        member_name: getUsername()
+        card_id: app.getTargetId(cardPattern)
+        member_name: app.getUsername()
       success: (response)->
         total_estimation = response.estimations.reduce ((total, estimation)->
           if estimation.is_manager == null || estimation.is_manager == false

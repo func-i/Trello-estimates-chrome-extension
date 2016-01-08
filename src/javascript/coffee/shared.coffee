@@ -1,21 +1,22 @@
-# serverURL = "http://estimation-fi.herokuapp.com"
-serverURL = "https://localhost:5000"
+window.trelloEstimationApp =
+  # serverURL: "http://estimation-fi.herokuapp.com"
+  serverURL: "https://localhost:5000"
 
-ajaxCalls = []
+  ajaxCalls: []
 
-abortAjaxCalls = ()->
-  for ajaxCall in ajaxCalls
-    ajaxCall.abort()
+  abortAjaxCalls: ()->
+    for ajaxCall in this.ajaxCalls
+      ajaxCall.abort()
 
-# target is board or card
-# returns the shortLink field instead of the Trello id
-getTargetId = (targetPattern)->
-  document.URL.match(targetPattern)[1]
+  # target is board or card
+  # returns the shortLink field instead of the Trello id
+  getTargetId: (targetPattern)->
+    document.URL.match(targetPattern)[1]
 
-getUsername = ()->
-  userFullName = $.trim($(".header-member").find(".member-initials").attr("title"))
-  beginParenthesis = userFullName.lastIndexOf("(")
-  endParenthesis = userFullName.lastIndexOf(")")
-  userFullName = userFullName.substr(beginParenthesis + 1)
-  userFullName.substr(0, userFullName.length - 1)
+  getUsername: ()->
+    userFullName = $.trim($(".header-member").find(".member-initials").attr("title"))
+    beginParenthesis = userFullName.lastIndexOf("(")
+    endParenthesis = userFullName.lastIndexOf(")")
+    userFullName = userFullName.substr(beginParenthesis + 1)
+    userFullName.substr(0, userFullName.length - 1)
 

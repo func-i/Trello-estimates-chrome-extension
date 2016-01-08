@@ -29,7 +29,7 @@
   };
 
   cardStatsHtml = function(stats) {
-    var html;
+    var html, trackClass;
     html = "";
     if (stats.estimate) {
       html += "<span class='card-fi-estimate'>estimate: " + stats.estimate + "</span>";
@@ -38,7 +38,11 @@
       }
     }
     if (stats.tracked) {
-      html += "<span class='card-fi-tracked'>tracked: " + stats.tracked + "</span>";
+      trackClass = "card-fi-tracked";
+      if (stats.estimate && stats.tracked > stats.estimate) {
+        trackClass += " tracked-over-estimate";
+      }
+      html += "<span class='" + trackClass + "'>tracked: " + stats.tracked + "</span>";
     }
     return html;
   };

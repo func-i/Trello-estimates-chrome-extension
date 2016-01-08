@@ -1,0 +1,7 @@
+.card-fi-tracked {
+  color: #3c763d;
+}
+
+.card-fi-tracked.tracked-over-estimate {
+  color: #a94442;
+}

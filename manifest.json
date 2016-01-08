@@ -28,6 +28,7 @@
         "/src/stylesheet/vendor/ui-lightness/jquery-ui-1.10.3.custom.css",
         "/src/stylesheet/vendor/ui-lightness/jquery-ui-1.10.3.custom.min.css",
         "/src/stylesheet/vendor/bootstrap.min.css",
+        "/src/stylesheet/board.css",
         "/src/stylesheet/estimations.css",
         "/src/stylesheet/spinner.css"
       ],

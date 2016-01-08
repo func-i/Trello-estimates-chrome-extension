@@ -27,7 +27,10 @@ cardStatsHtml = (stats)->
     html += " | " if stats.tracked
 
   if stats.tracked
-    html += "<span class='card-fi-tracked'>tracked: #{stats.tracked}</span>"
+    trackClass = "card-fi-tracked"
+    if stats.estimate && stats.tracked > stats.estimate
+      trackClass += " tracked-over-estimate"
+    html += "<span class='#{trackClass}'>tracked: #{stats.tracked}</span>"
   html
 
 showUpdatedStats = (cards)->

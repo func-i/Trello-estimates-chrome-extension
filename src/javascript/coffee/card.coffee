@@ -25,7 +25,6 @@ sendEstimation = ()->
     dataType: "json"
     data:
       estimation: buildEstimationObject()
-    async: false
     success: closeEstimationModal
     error: ajaxErrorAlert
 
@@ -56,10 +55,10 @@ createEstimationButton = (html)->
   actions = sidebar.children(".other-actions") # only board owner
   if actions.length == 0
     actions = sidebar.children(".window-module").eq(0)
-  
+
   actions.children(".u-clearfix").prepend(html)
   loadEstimationModal() if $("#estimation_dialog").length == 0
-  
+
   $(".js-add-estimation-menu").on "click", ()->
     $("#estimation_dialog").dialog("open")
 

@@ -5,6 +5,5 @@
 #   git config --global core.excludesfile ~/.gitignore_global
 
 # Ignore vendor scripts and compiled scripts
-/src/javascript/vendors
 /src/javascript/*.js
 

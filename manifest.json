@@ -8,7 +8,7 @@
   "permissions": [
     "tabs",
     "https://localhost:5000/estimations",
-    "http://estimation-fi.herokuapp.com/estimations"
+    "https://estimation-fi.herokuapp.com/estimations"
   ],
 
   "background": {

@@ -1,6 +1,6 @@
 window.trelloEstimationApp =
-  # serverURL: "http://estimation-fi.herokuapp.com"
-  serverURL: "https://localhost:5000"
+  serverURL: "https://estimation-fi.herokuapp.com"
+  # serverURL: "https://localhost:5000"
 
   ajaxCalls: []
 

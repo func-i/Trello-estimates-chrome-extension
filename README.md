@@ -1,4 +1,4 @@
-#### 1. Open the server app and authenticate with Trello
+#### 1. Open the [server app](https://estimation-fi.herokuapp.com/) and authenticate with Trello
 
 #### 2. Complie CoffeeScript into JavaScript:
 
@@ -7,8 +7,9 @@
 
 #### 3. Load the Chrome Extension:
 
-- in the browser, open chrome://extensions/
-- click "Load unpacked extension..."
-- select the chrome extension folder
+- In the browser, open chrome://extensions/
+- Enable Developer Mode (checkbox on the top right)
+- Click "Load unpacked extension..."
+- Select the chrome extension folder
 
 #### 4. Open the Trello board/card in Chrome

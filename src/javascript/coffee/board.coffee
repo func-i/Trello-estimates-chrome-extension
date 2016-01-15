@@ -23,35 +23,63 @@ compareCardStats = (oldCards, newCards)->
 cardStatsHtml = (stats)->
   html = "["
   if stats.estimate
-    html += "<span class='card-fi-estimate'>#{stats.estimate} hrs</span>"
+    html += "#{stats.estimate} hrs"
     html += " / " if stats.tracked
 
   if stats.tracked
-    trackClass = "card-fi-tracked"
-    if stats.estimate && stats.tracked > stats.estimate
-      trackClass += " tracked-over-estimate"
-    html += "<span class='#{trackClass}'>#{stats.tracked} hrs</span>"
+    html += "#{stats.tracked} hrs"
   html += "]"
 
-showUpdatedStats = (cards)->
+addCardStats = (cardTitle, stats)->
+  statsDiv  = cardTitle.next(".card-fi-stats")
+  statsHtml = cardStatsHtml(stats)
+
+  if statsDiv.length == 0
+    statsHtml = "<div class='card-fi-stats'>" + statsHtml + "</div>"
+    cardTitle.after(statsHtml)
+  else
+    statsDiv.empty().append(statsHtml)
+
+# add one of "fi-card-estimate fi-card-warning fi-card-overtime" to the card and
+# remove all other classes. Or add none and remove all
+assignCardClass = (card, cardClass)->
+  classArr = ["fi-card-estimate", "fi-card-warning", "fi-card-overtime"]
+  if cardClass
+    # remove cardClass from classAarr
+    classArr.splice(classArr.indexOf(cardClass), 1)
+    card.addClass(cardClass)
+
+  card.removeClass(classArr.join(" "))
+
+setCardBackground = (cardTitle, stats)->
+  card = cardTitle.parent()
+  lowerBound = stats.estimate * 0.85
+  upperBound = stats.estimate * 1.15
+
+  if stats.estimate
+    if not stats.tracked or stats.tracked < lowerBound
+      assignCardClass(card, "fi-card-estimate")
+    else if stats.tracked > upperBound
+      assignCardClass(card, "fi-card-overtime")
+    else # stats.tracked between lowerBound and upperBound
+      assignCardClass(card, "fi-card-warning")
+
+  else # card has no estimate
+    assignCardClass(card, null)
+
+showUpdatedCards = (cards)->
   cardTitles = $(".list-card-title")
 
   for id, stats of cards
     cardTitle = cardTitles.filter("a[href^='/c/#{id}/']")
-    statsDiv  = cardTitle.next(".card-fi-stats")
-    statsHtml = cardStatsHtml(stats)
-
-    if statsDiv.length == 0
-      statsHtml = "<div class='card-fi-stats'>" + statsHtml + "</div>"
-      cardTitle.after(statsHtml)
-    else
-      statsDiv.empty().append(statsHtml)
+    addCardStats(cardTitle, stats)
+    # setCardBackground(cardTitle, stats)
 
 updateCards = (response)->
   oldCards    = JSON.parse(JSON.stringify(boardCards))
   boardCards  = response
   diffCards   = compareCardStats(oldCards, boardCards)
-  showUpdatedStats(diffCards)
+  showUpdatedCards(diffCards)
 
 getCardsOnBoard = ()->
   ajaxCalls.push $.ajax "#{serverURL}/estimations",

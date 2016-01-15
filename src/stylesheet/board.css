@@ -1,7 +1,19 @@
-.card-fi-tracked {
-  color: #3c763d;
+/* orange background for cards without estimates */
+.list-card-details {
+  background-color: #FF9966;
 }
 
-.card-fi-tracked.tracked-over-estimate {
-  color: #a94442;
+/* white background for cards with estimates */
+.fi-card-estimate {
+  background-color: #FFFFFF;
+}
+
+/* yellow background for cards where tracked time is within 15% over/under estimate */
+.fi-card-warning {
+  background-color: #FFFF99;
+}
+
+/* yellow background for cards where tracked time is >15% over estimate */
+.fi-card-overtime {
+  background-color: #FF3366;
 }

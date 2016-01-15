@@ -14,24 +14,24 @@ compareCardStats = (oldCards, newCards)->
   for id, stats of newCards
     oldStats = oldCards[id]
 
-    if !oldStats || 
+    if !oldStats ||
        oldStats.estimate != stats.estimate || oldStats.tracked != stats.tracked
       diffCards[id] = stats
   console.log(diffCards)
   diffCards
 
 cardStatsHtml = (stats)->
-  html = ""
+  html = "["
   if stats.estimate
-    html += "<span class='card-fi-estimate'>estimate: #{stats.estimate}</span>"
-    html += " | " if stats.tracked
+    html += "<span class='card-fi-estimate'>#{stats.estimate} hrs</span>"
+    html += " / " if stats.tracked
 
   if stats.tracked
     trackClass = "card-fi-tracked"
     if stats.estimate && stats.tracked > stats.estimate
       trackClass += " tracked-over-estimate"
-    html += "<span class='#{trackClass}'>tracked: #{stats.tracked}</span>"
-  html
+    html += "<span class='#{trackClass}'>#{stats.tracked} hrs</span>"
+  html += "]"
 
 showUpdatedStats = (cards)->
   cardTitles = $(".list-card-title")
@@ -46,7 +46,7 @@ showUpdatedStats = (cards)->
       cardTitle.after(statsHtml)
     else
       statsDiv.empty().append(statsHtml)
-  
+
 updateCards = (response)->
   oldCards    = JSON.parse(JSON.stringify(boardCards))
   boardCards  = response

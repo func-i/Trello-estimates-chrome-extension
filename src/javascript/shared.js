@@ -21,11 +21,19 @@
     },
     getUsername: function() {
       var beginParenthesis, endParenthesis, userFullName;
-      userFullName = $.trim($(".header-member").find(".member-initials").attr("title"));
+      userFullName = $.trim(this.getMemberTag().attr("title"));
       beginParenthesis = userFullName.lastIndexOf("(");
       endParenthesis = userFullName.lastIndexOf(")");
       userFullName = userFullName.substr(beginParenthesis + 1);
       return userFullName.substr(0, userFullName.length - 1);
+    },
+    getMemberTag: function() {
+      var memberTag;
+      memberTag = $(".header-member").find(".member-initials");
+      if (memberTag.length === 0) {
+        memberTag = $(".header-member").find(".member-avatar");
+      }
+      return memberTag;
     }
   };
 

@@ -17,9 +17,15 @@ window.trelloEstimationApp =
     document.URL.match(targetPattern)[1]
 
   getUsername: ()->
-    userFullName = $.trim($(".header-member").find(".member-initials").attr("title"))
+    userFullName = $.trim(this.getMemberTag().attr("title"))
     beginParenthesis = userFullName.lastIndexOf("(")
     endParenthesis = userFullName.lastIndexOf(")")
     userFullName = userFullName.substr(beginParenthesis + 1)
     userFullName.substr(0, userFullName.length - 1)
 
+  # find the span.member-initials or img.member-avatar in the Trello board/card page header
+  getMemberTag: ()->
+    memberTag = $(".header-member").find(".member-initials")
+    if memberTag.length == 0
+      memberTag = $(".header-member").find(".member-avatar")
+    memberTag

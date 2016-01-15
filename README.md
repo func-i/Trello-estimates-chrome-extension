@@ -1,3 +1,5 @@
+*IMPORTANT: You must open the server app and authenticate with Trello before opening Trello with the Chrome extension*
+
 #### 1. Open the [server app](https://estimation-fi.herokuapp.com/) and authenticate with Trello
 
 #### 2. Complie CoffeeScript into JavaScript:

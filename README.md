@@ -2,7 +2,7 @@
 
 #### 1. Open the [server app](https://estimation-fi.herokuapp.com/) and authenticate with Trello
 
-#### 2. Complie CoffeeScript into JavaScript:
+#### 2. Development only - complie CoffeeScript into JavaScript:
 
 - In the terminal, go to the chrome extension folder
 - coffee -o src/javascript -wc src/javascript/coffee

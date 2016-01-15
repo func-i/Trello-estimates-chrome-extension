@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "Github-Trello",
-  "description": "Trello extension for chrome",
+  "name": "FI Trello Estimation Tool",
+  "description": "Estimate task time on Trello cards",
   "version": "0.1",
 
   "permissions": [

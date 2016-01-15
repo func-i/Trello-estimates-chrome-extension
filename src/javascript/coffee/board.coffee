@@ -22,12 +22,9 @@ compareCardStats = (oldCards, newCards)->
 
 cardStatsHtml = (stats)->
   html = "["
-  if stats.estimate
-    html += "#{stats.estimate} hrs"
-    html += " / " if stats.tracked
-
-  if stats.tracked
-    html += "#{stats.tracked} hrs"
+  html += "#{stats.estimate} hrs" if stats.estimate
+  html += " / "
+  html += "#{stats.tracked} hrs" if stats.tracked
   html += "]"
 
 addCardStats = (cardTitle, stats)->
@@ -73,7 +70,7 @@ showUpdatedCards = (cards)->
   for id, stats of cards
     cardTitle = cardTitles.filter("a[href^='/c/#{id}/']")
     addCardStats(cardTitle, stats)
-    # setCardBackground(cardTitle, stats)
+    setCardBackground(cardTitle, stats)
 
 updateCards = (response)->
   oldCards    = JSON.parse(JSON.stringify(boardCards))

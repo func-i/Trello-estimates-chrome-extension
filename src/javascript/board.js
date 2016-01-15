@@ -33,10 +33,8 @@
     html = "[";
     if (stats.estimate) {
       html += stats.estimate + " hrs";
-      if (stats.tracked) {
-        html += " / ";
-      }
     }
+    html += " / ";
     if (stats.tracked) {
       html += stats.tracked + " hrs";
     }
@@ -90,7 +88,8 @@
     for (id in cards) {
       stats = cards[id];
       cardTitle = cardTitles.filter("a[href^='/c/" + id + "/']");
-      results.push(addCardStats(cardTitle, stats));
+      addCardStats(cardTitle, stats);
+      results.push(setCardBackground(cardTitle, stats));
     }
     return results;
   };

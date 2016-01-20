@@ -37,32 +37,20 @@ addCardStats = (cardTitle, stats)->
   else
     statsDiv.empty().append(statsHtml)
 
-# add one of "fi-card-estimate fi-card-warning fi-card-overtime" to the card and
-# remove all other classes. Or add none and remove all
-assignCardClass = (card, cardClass)->
-  classArr = ["fi-card-estimate", "fi-card-warning", "fi-card-overtime"]
-  if cardClass
-    # remove cardClass from classAarr
-    classArr.splice(classArr.indexOf(cardClass), 1)
-    card.addClass(cardClass)
-
-  card.removeClass(classArr.join(" "))
-
 setCardBackground = (cardTitle, stats)->
   card = cardTitle.parent()
   lowerBound = stats.estimate * 0.85
   upperBound = stats.estimate * 1.15
 
+  card.removeClass("fi-card-estimate fi-card-warning fi-card-overtime")
+
   if stats.estimate
     if not stats.tracked or stats.tracked < lowerBound
-      assignCardClass(card, "fi-card-estimate")
+      card.addClass("fi-card-estimate")
     else if stats.tracked > upperBound
-      assignCardClass(card, "fi-card-overtime")
+      card.addClass("fi-card-overtime")
     else # stats.tracked between lowerBound and upperBound
-      assignCardClass(card, "fi-card-warning")
-
-  else # card has no estimate
-    assignCardClass(card, null)
+      card.addClass("fi-card-warning")
 
 showUpdatedCards = (cards)->
   cardTitles = $(".list-card-title")

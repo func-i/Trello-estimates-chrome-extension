@@ -1,7 +1,7 @@
 (function() {
-  var addCardStats, add_estimation_to_list, ajaxCalls, ajaxErrorAlert, app, bindEstimationModalEvents, boardCards, boardPattern, buildEstimationObject, calc_total_estimation, cardInProgress, cardPattern, cardStatsHtml, cardUnderestimated, closeEstimationModal, compareCardStats, createEstimationButton, getCardsOnBoard, getEstimations, loadEstimationButton, loadEstimationModal, loadEstimationTimeTrackerBar, loadEstimationsList, openEstimationModal, populateEstimationSection, sendEstimation, serverURL, setCardBackground, showUpdatedCards, updateCards;
+  var addCardStats, add_estimation_to_list, app, bindEstimationModalEvents, boardCards, boardPattern, buildEstimationObject, calc_total_estimation, cardInProgress, cardPattern, cardStatsHtml, cardUnderestimated, closeEstimationModal, compareCardStats, createEstimationButton, getCardsOnBoard, getEstimations, loadEstimationButton, loadEstimationModal, loadEstimationTimeTrackerBar, loadEstimationsList, openEstimationModal, populateEstimationSection, sendEstimation, setCardBackground, showUpdatedCards, updateCards;
 
-  window.trelloEstimationApp = {
+  app = {
     serverURL: "https://estimation-fi.herokuapp.com",
     ajaxCalls: [],
     ajaxErrorAlert: function(jqXHR) {
@@ -37,14 +37,6 @@
       return memberTag;
     }
   };
-
-  app = window.trelloEstimationApp;
-
-  serverURL = app.serverURL;
-
-  ajaxCalls = app.ajaxCalls;
-
-  ajaxErrorAlert = app.ajaxErrorAlert;
 
   boardPattern = /^https:\/\/trello.com\/b\/(\S+)\/(\S+)$/;
 
@@ -128,13 +120,13 @@
   };
 
   getCardsOnBoard = function() {
-    return ajaxCalls.push($.ajax(serverURL + "/estimations", {
+    return app.ajaxCalls.push($.ajax(app.serverURL + "/estimations", {
       data: {
         board_id: app.getTargetId(boardPattern),
         member_name: app.getUsername()
       },
       success: updateCards,
-      error: ajaxErrorAlert
+      error: app.ajaxErrorAlert
     }));
   };
 
@@ -148,14 +140,6 @@
   app.loadBoard = function() {
     return getCardsOnBoard();
   };
-
-  app = window.trelloEstimationApp;
-
-  serverURL = app.serverURL;
-
-  ajaxCalls = app.ajaxCalls;
-
-  ajaxErrorAlert = app.ajaxErrorAlert;
 
   cardPattern = /^https:\/\/trello.com\/c\/(\S+)\/(\S+)$/;
 
@@ -177,14 +161,14 @@
   };
 
   sendEstimation = function() {
-    return ajaxCalls.push($.ajax(serverURL + "/estimations", {
+    return app.ajaxCalls.push($.ajax(app.serverURL + "/estimations", {
       method: "post",
       dataType: "json",
       data: {
         estimation: buildEstimationObject()
       },
       success: closeEstimationModal,
-      error: ajaxErrorAlert
+      error: app.ajaxErrorAlert
     }));
   };
 
@@ -209,7 +193,7 @@
   };
 
   loadEstimationModal = function() {
-    return ajaxCalls.push($.ajax(chrome.extension.getURL("dist/html/estimation_modal.html"), {
+    return app.ajaxCalls.push($.ajax(chrome.extension.getURL("dist/html/estimation_modal.html"), {
       dataType: 'html',
       success: openEstimationModal
     }));
@@ -232,7 +216,7 @@
   };
 
   loadEstimationButton = function() {
-    return ajaxCalls.push($.ajax(chrome.extension.getURL("dist/html/card_estimation_btn.html"), {
+    return app.ajaxCalls.push($.ajax(chrome.extension.getURL("dist/html/card_estimation_btn.html"), {
       dataType: 'html',
       success: createEstimationButton
     }));
@@ -296,18 +280,18 @@
   };
 
   getEstimations = function() {
-    return ajaxCalls.push($.ajax(serverURL + "/estimations", {
+    return app.ajaxCalls.push($.ajax(app.serverURL + "/estimations", {
       data: {
         card_id: app.getTargetId(cardPattern),
         member_name: app.getUsername()
       },
       success: populateEstimationSection,
-      error: ajaxErrorAlert
+      error: app.ajaxErrorAlert
     }));
   };
 
   loadEstimationsList = function() {
-    return ajaxCalls.push($.ajax(chrome.extension.getURL("dist/html/estimations.html"), {
+    return app.ajaxCalls.push($.ajax(chrome.extension.getURL("dist/html/estimations.html"), {
       dataType: 'html',
       success: function(html) {
         $(".card-detail-data").prepend(html);
@@ -327,8 +311,6 @@
     loadEstimationButton();
     return loadEstimationsList();
   };
-
-  app = window.trelloEstimationApp;
 
   chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     if (app.boardIsOpen()) {

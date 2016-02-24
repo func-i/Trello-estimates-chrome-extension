@@ -23,9 +23,18 @@ app =
     userFullName = userFullName.substr(beginParenthesis + 1)
     userFullName.substr(0, userFullName.length - 1)
 
-  # find the span.member-initials or img.member-avatar in the Trello board/card page header
+  # find the span.member-initials or img.member-avatar in
+  # the Trello board/card page header
   getMemberTag: ()->
     memberTag = $(".header-member").find(".member-initials")
     if memberTag.length == 0
       memberTag = $(".header-member").find(".member-avatar")
     memberTag
+
+  # Check whether the current page is a Trello board or a Trello card
+  boardIsOpen: ()->
+    document.URL.indexOf("trello.com/b/") >= 0
+
+  cardIsOpen: ()->
+    document.URL.indexOf("trello.com/c/") >= 0
+

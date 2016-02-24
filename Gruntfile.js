@@ -52,7 +52,7 @@ module.exports = function(grunt) {
         files: {
           'dist/background.js': 'src/script/background.coffee',
           'dist/content.js': [
-            'src/script/shared.coffee',
+            'src/script/app.coffee',
             'src/script/board.coffee',
             'src/script/card.coffee',
             'src/script/main.coffee'

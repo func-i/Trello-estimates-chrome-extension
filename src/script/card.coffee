@@ -1,8 +1,3 @@
-app = window.trelloEstimationApp
-serverURL       = app.serverURL
-ajaxCalls       = app.ajaxCalls
-ajaxErrorAlert  = app.ajaxErrorAlert
-
 cardPattern = /^https:\/\/trello.com\/c\/(\S+)\/(\S+)$/
 
 buildEstimationObject = ()->
@@ -20,13 +15,13 @@ closeEstimationModal = (response)->
   $("#estimation_dialog").dialog("close")
 
 sendEstimation = ()->
-  ajaxCalls.push $.ajax "#{serverURL}/estimations",
+  app.ajaxCalls.push $.ajax "#{app.serverURL}/estimations",
     method: "post"
     dataType: "json"
     data:
       estimation: buildEstimationObject()
     success: closeEstimationModal
-    error: ajaxErrorAlert
+    error: app.ajaxErrorAlert
 
 bindEstimationModalEvents = ()->
   $("#estimation_modal_btn").click (e)->
@@ -46,7 +41,7 @@ openEstimationModal = (html)->
     title: "Estimate time for this card"
 
 loadEstimationModal = ()->
-  ajaxCalls.push $.ajax chrome.extension.getURL("dist/html/estimation_modal.html"),
+  app.ajaxCalls.push $.ajax chrome.extension.getURL("dist/html/estimation_modal.html"),
     dataType: 'html'
     success: openEstimationModal
 
@@ -63,7 +58,7 @@ createEstimationButton = (html)->
     $("#estimation_dialog").dialog("open")
 
 loadEstimationButton = ()->
-  ajaxCalls.push $.ajax chrome.extension.getURL("dist/html/card_estimation_btn.html"),
+  app.ajaxCalls.push $.ajax chrome.extension.getURL("dist/html/card_estimation_btn.html"),
     dataType: 'html'
     success: createEstimationButton
 
@@ -116,25 +111,20 @@ populateEstimationSection = (response)->
     .css("font-weight", "bold")
 
 getEstimations = ()->
-  ajaxCalls.push $.ajax "#{serverURL}/estimations",
+  app.ajaxCalls.push $.ajax "#{app.serverURL}/estimations",
     data:
       card_id: app.getTargetId(cardPattern)
       member_name: app.getUsername()
     success: populateEstimationSection
-    error: ajaxErrorAlert
+    error: app.ajaxErrorAlert
 
 loadEstimationsList = ()->
-  ajaxCalls.push $.ajax chrome.extension.getURL("dist/html/estimations.html"),
+  app.ajaxCalls.push $.ajax chrome.extension.getURL("dist/html/estimations.html"),
     dataType: 'html'
     success: (html)->
       $(".card-detail-data").prepend(html)
       getEstimations()
 
-### App-level functions ###
-
-app.cardIsOpen = ()->
-  document.URL.indexOf("trello.com/c/") >= 0
-
-app.loadCard = ()->
+loadCard = ()->
   loadEstimationButton()
   loadEstimationsList()

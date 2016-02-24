@@ -1,8 +1,3 @@
-app = window.trelloEstimationApp
-serverURL       = app.serverURL
-ajaxCalls       = app.ajaxCalls
-ajaxErrorAlert  = app.ajaxErrorAlert
-
 boardPattern  = /^https:\/\/trello.com\/b\/(\S+)\/(\S+)$/
 
 boardCards = {}
@@ -67,17 +62,12 @@ updateCards = (response)->
   showUpdatedCards(diffCards)
 
 getCardsOnBoard = ()->
-  ajaxCalls.push $.ajax "#{serverURL}/estimations",
+  app.ajaxCalls.push $.ajax "#{app.serverURL}/estimations",
     data:
       board_id: app.getTargetId(boardPattern)
       member_name: app.getUsername()
     success: updateCards
-    error: ajaxErrorAlert
+    error: app.ajaxErrorAlert
 
-### App-level functions ###
-
-app.boardIsOpen = ()->
-  document.URL.indexOf("trello.com/b/") >= 0
-
-app.loadBoard = ()->
+loadBoard = ()->
   getCardsOnBoard()

@@ -2,6 +2,8 @@ app =
   serverURL: "https://estimation-fi.herokuapp.com"
   # serverURL: "https://localhost:5000"
 
+  htmlDir: "dist/html"
+
   ajaxCalls: []
 
   ajaxErrorAlert: (jqXHR)->

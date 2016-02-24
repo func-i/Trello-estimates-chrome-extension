@@ -1,8 +1,6 @@
 card =
   urlPattern: /^https:\/\/trello.com\/c\/(\S+)\/(\S+)$/
 
-  htmlDir: "dist/html"
-
   buildEstimationObject: () ->
     estimation =
       card_id: app.getTargetId(@urlPattern)
@@ -46,7 +44,7 @@ card =
       title: "Estimate time for this card"
 
   loadEstimationModal: () ->
-    htmlPath  = chrome.extension.getURL("#{@htmlDir}/estimation_modal.html")
+    htmlPath  = chrome.extension.getURL("#{app.htmlDir}/estimation_modal.html")
     ajaxCall  = $.ajax htmlPath,
       dataType: "html"
       success: this.openEstimationModal
@@ -66,7 +64,7 @@ card =
       $("#estimation_dialog").dialog("open")
 
   loadEstimationButton: () ->
-    htmlPath = chrome.extension.getURL("#{@htmlDir}/card_estimation_btn.html")
+    htmlPath = chrome.extension.getURL("#{app.htmlDir}/card_estimation_btn.html")
     ajaxCall = $.ajax htmlPath,
       dataType: "html"
       success: this.createEstimationButton
@@ -133,7 +131,7 @@ card =
     app.ajaxCalls.push ajaxCall
 
   loadEstimationsList: () ->
-    htmlPath = chrome.extension.getURL("#{@htmlDir}/estimations.html")
+    htmlPath = chrome.extension.getURL("#{app.htmlDir}/estimations.html")
     ajaxCall = $.ajax htmlPath,
       dataType: "html"
       success: (html) =>

@@ -1,5 +1,5 @@
 (function() {
-  var addCardStats, add_estimation_to_list, app, bindEstimationModalEvents, boardCards, boardPattern, buildEstimationObject, calc_total_estimation, cardInProgress, cardPattern, cardStatsHtml, cardUnderestimated, closeEstimationModal, compareCardStats, createEstimationButton, getCardsOnBoard, getEstimations, loadEstimationButton, loadEstimationModal, loadEstimationTimeTrackerBar, loadEstimationsList, openEstimationModal, populateEstimationSection, sendEstimation, setCardBackground, showUpdatedCards, updateCards;
+  var add_estimation_to_list, app, bindEstimationModalEvents, board, buildEstimationObject, calc_total_estimation, cardInProgress, cardPattern, cardUnderestimated, closeEstimationModal, createEstimationButton, getEstimations, loadCard, loadEstimationButton, loadEstimationModal, loadEstimationTimeTrackerBar, loadEstimationsList, openEstimationModal, populateEstimationSection, sendEstimation;
 
   app = {
     serverURL: "https://estimation-fi.herokuapp.com",
@@ -35,110 +35,103 @@
         memberTag = $(".header-member").find(".member-avatar");
       }
       return memberTag;
+    },
+    boardIsOpen: function() {
+      return document.URL.indexOf("trello.com/b/") >= 0;
+    },
+    cardIsOpen: function() {
+      return document.URL.indexOf("trello.com/c/") >= 0;
     }
   };
 
-  boardPattern = /^https:\/\/trello.com\/b\/(\S+)\/(\S+)$/;
-
-  boardCards = {};
-
-  compareCardStats = function(oldCards, newCards) {
-    var diffCards, id, oldStats, stats;
-    diffCards = {};
-    for (id in newCards) {
-      stats = newCards[id];
-      oldStats = oldCards[id];
-      if (!oldStats || oldStats.estimate !== stats.estimate || oldStats.tracked !== stats.tracked) {
-        diffCards[id] = stats;
+  board = {
+    urlPattern: /^https:\/\/trello.com\/b\/(\S+)\/(\S+)$/,
+    cards: {},
+    compareCardStats: function(oldCards, newCards) {
+      var diffCards, id, oldStats, stats;
+      diffCards = {};
+      for (id in newCards) {
+        stats = newCards[id];
+        oldStats = oldCards[id];
+        if (!oldStats || oldStats.estimate !== stats.estimate || oldStats.tracked !== stats.tracked) {
+          diffCards[id] = stats;
+        }
       }
-    }
-    console.log(diffCards);
-    return diffCards;
-  };
-
-  cardStatsHtml = function(stats) {
-    var html;
-    html = "[";
-    if (stats.estimate) {
-      html += stats.estimate + " hrs";
-    }
-    html += " / ";
-    if (stats.tracked) {
-      html += stats.tracked + " hrs";
-    }
-    return html += "]";
-  };
-
-  addCardStats = function(cardTitle, stats) {
-    var statsDiv, statsHtml;
-    statsDiv = cardTitle.next(".card-fi-stats");
-    statsHtml = cardStatsHtml(stats);
-    if (statsDiv.length === 0) {
-      statsHtml = "<div class='card-fi-stats'>" + statsHtml + "</div>";
-      return cardTitle.after(statsHtml);
-    } else {
-      return statsDiv.empty().append(statsHtml);
-    }
-  };
-
-  setCardBackground = function(cardTitle, stats) {
-    var card, lowerBound, upperBound;
-    card = cardTitle.parent();
-    lowerBound = stats.estimate * 0.85;
-    upperBound = stats.estimate * 1.15;
-    card.removeClass("fi-card-estimate fi-card-warning fi-card-overtime");
-    if (stats.estimate) {
-      if (!stats.tracked || stats.tracked < lowerBound) {
-        return card.addClass("fi-card-estimate");
-      } else if (stats.tracked > upperBound) {
-        return card.addClass("fi-card-overtime");
+      console.log(diffCards);
+      return diffCards;
+    },
+    cardStatsHtml: function(stats) {
+      var html;
+      html = "[";
+      if (stats.estimate) {
+        html += stats.estimate + " hrs";
+      }
+      html += " / ";
+      if (stats.tracked) {
+        html += stats.tracked + " hrs";
+      }
+      return html += "]";
+    },
+    addCardStats: function(cardTitle, stats) {
+      var statsDiv, statsHtml;
+      statsDiv = cardTitle.next(".card-fi-stats");
+      statsHtml = this.cardStatsHtml(stats);
+      if (statsDiv.length === 0) {
+        statsHtml = "<div class='card-fi-stats'>" + statsHtml + "</div>";
+        return cardTitle.after(statsHtml);
       } else {
-        return card.addClass("fi-card-warning");
+        return statsDiv.empty().append(statsHtml);
       }
+    },
+    setCardBackground: function(cardTitle, stats) {
+      var card, lowerBound, upperBound;
+      card = cardTitle.parent();
+      lowerBound = stats.estimate * 0.85;
+      upperBound = stats.estimate * 1.15;
+      card.removeClass("fi-card-estimate fi-card-warning fi-card-overtime");
+      if (stats.estimate) {
+        if (!stats.tracked || stats.tracked < lowerBound) {
+          return card.addClass("fi-card-estimate");
+        } else if (stats.tracked > upperBound) {
+          return card.addClass("fi-card-overtime");
+        } else {
+          return card.addClass("fi-card-warning");
+        }
+      }
+    },
+    showUpdatedCards: function(cards) {
+      var cardTitle, cardTitles, id, results, stats;
+      cardTitles = $(".list-card-title");
+      results = [];
+      for (id in cards) {
+        stats = cards[id];
+        cardTitle = cardTitles.filter("a[href^='/c/" + id + "/']");
+        this.addCardStats(cardTitle, stats);
+        results.push(this.setCardBackground(cardTitle, stats));
+      }
+      return results;
+    },
+    updateCards: function(response) {
+      var _this, diffCards, oldCards;
+      _this = board;
+      oldCards = JSON.parse(JSON.stringify(_this.cards));
+      _this.cards = response;
+      diffCards = _this.compareCardStats(oldCards, _this.cards);
+      return _this.showUpdatedCards(diffCards);
+    },
+    getCardsOnBoard: function() {
+      return app.ajaxCalls.push($.ajax(app.serverURL + "/estimations", {
+        data: {
+          board_id: app.getTargetId(this.urlPattern),
+          member_name: app.getUsername()
+        },
+        success: this.updateCards,
+        error: app.ajaxErrorAlert
+      }));
+    },
+    load: function() {
+      return this.getCardsOnBoard();
     }
-  };
-
-  showUpdatedCards = function(cards) {
-    var cardTitle, cardTitles, id, results, stats;
-    cardTitles = $(".list-card-title");
-    results = [];
-    for (id in cards) {
-      stats = cards[id];
-      cardTitle = cardTitles.filter("a[href^='/c/" + id + "/']");
-      addCardStats(cardTitle, stats);
-      results.push(setCardBackground(cardTitle, stats));
-    }
-    return results;
-  };
-
-  updateCards = function(response) {
-    var diffCards, oldCards;
-    oldCards = JSON.parse(JSON.stringify(boardCards));
-    boardCards = response;
-    diffCards = compareCardStats(oldCards, boardCards);
-    return showUpdatedCards(diffCards);
-  };
-
-  getCardsOnBoard = function() {
-    return app.ajaxCalls.push($.ajax(app.serverURL + "/estimations", {
-      data: {
-        board_id: app.getTargetId(boardPattern),
-        member_name: app.getUsername()
-      },
-      success: updateCards,
-      error: app.ajaxErrorAlert
-    }));
-  };
-
-
-  /* App-level functions */
-
-  app.boardIsOpen = function() {
-    return document.URL.indexOf("trello.com/b/") >= 0;
-  };
-
-  app.loadBoard = function() {
-    return getCardsOnBoard();
   };
 
   cardPattern = /^https:\/\/trello.com\/c\/(\S+)\/(\S+)$/;
@@ -300,14 +293,7 @@
     }));
   };
 
-
-  /* App-level functions */
-
-  app.cardIsOpen = function() {
-    return document.URL.indexOf("trello.com/c/") >= 0;
-  };
-
-  app.loadCard = function() {
+  loadCard = function() {
     loadEstimationButton();
     return loadEstimationsList();
   };
@@ -315,11 +301,11 @@
   chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     if (app.boardIsOpen()) {
       app.abortAjaxCalls();
-      app.loadBoard();
+      board.load();
     }
     if (app.cardIsOpen() && $(".js-add-estimation-menu").length === 0) {
       app.abortAjaxCalls();
-      return app.loadCard();
+      return loadCard();
     }
   });
 

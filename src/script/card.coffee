@@ -46,7 +46,7 @@ openEstimationModal = (html)->
     title: "Estimate time for this card"
 
 loadEstimationModal = ()->
-  ajaxCalls.push $.ajax chrome.extension.getURL("src/html/estimation_modal.html"),
+  ajaxCalls.push $.ajax chrome.extension.getURL("dist/html/estimation_modal.html"),
     dataType: 'html'
     success: openEstimationModal
 
@@ -63,7 +63,7 @@ createEstimationButton = (html)->
     $("#estimation_dialog").dialog("open")
 
 loadEstimationButton = ()->
-  ajaxCalls.push $.ajax chrome.extension.getURL("src/html/card_estimation_btn.html"),
+  ajaxCalls.push $.ajax chrome.extension.getURL("dist/html/card_estimation_btn.html"),
     dataType: 'html'
     success: createEstimationButton
 
@@ -124,7 +124,7 @@ getEstimations = ()->
     error: ajaxErrorAlert
 
 loadEstimationsList = ()->
-  ajaxCalls.push $.ajax chrome.extension.getURL("src/html/estimations.html"),
+  ajaxCalls.push $.ajax chrome.extension.getURL("dist/html/estimations.html"),
     dataType: 'html'
     success: (html)->
       $(".card-detail-data").prepend(html)

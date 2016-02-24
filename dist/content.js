@@ -209,7 +209,7 @@
   };
 
   loadEstimationModal = function() {
-    return ajaxCalls.push($.ajax(chrome.extension.getURL("src/html/estimation_modal.html"), {
+    return ajaxCalls.push($.ajax(chrome.extension.getURL("dist/html/estimation_modal.html"), {
       dataType: 'html',
       success: openEstimationModal
     }));
@@ -232,7 +232,7 @@
   };
 
   loadEstimationButton = function() {
-    return ajaxCalls.push($.ajax(chrome.extension.getURL("src/html/card_estimation_btn.html"), {
+    return ajaxCalls.push($.ajax(chrome.extension.getURL("dist/html/card_estimation_btn.html"), {
       dataType: 'html',
       success: createEstimationButton
     }));
@@ -307,7 +307,7 @@
   };
 
   loadEstimationsList = function() {
-    return ajaxCalls.push($.ajax(chrome.extension.getURL("src/html/estimations.html"), {
+    return ajaxCalls.push($.ajax(chrome.extension.getURL("dist/html/estimations.html"), {
       dataType: 'html',
       success: function(html) {
         $(".card-detail-data").prepend(html);

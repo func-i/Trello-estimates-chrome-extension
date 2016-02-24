@@ -64,12 +64,14 @@ board =
     _this.showUpdatedCards(diffCards)
 
   getCardsOnBoard: ()->
-    app.ajaxCalls.push $.ajax "#{app.serverURL}/estimations",
+    ajaxCall = $.ajax "#{app.serverURL}/estimations",
       data:
-        board_id: app.getTargetId(this.urlPattern)
+        board_id: app.getTargetId(@urlPattern)
         member_name: app.getUsername()
       success: this.updateCards
       error: app.ajaxErrorAlert
+
+    app.ajaxCalls.push ajaxCall
 
   load: ()->
     this.getCardsOnBoard()

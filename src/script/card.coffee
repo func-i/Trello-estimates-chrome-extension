@@ -1,130 +1,147 @@
-cardPattern = /^https:\/\/trello.com\/c\/(\S+)\/(\S+)$/
+card =
+  urlPattern: /^https:\/\/trello.com\/c\/(\S+)\/(\S+)$/
 
-buildEstimationObject = ()->
-  estimation =
-    card_id: app.getTargetId(cardPattern)
-    user_time: $("#estimation_time").val()
-    user_username: app.getUsername()
-    # is_manager: $("#manager_estimation").prop('checked')
-    is_manager: false
+  htmlDir: "dist/html"
 
-closeEstimationModal = (response)->
-  $("#estimation_section").remove()
-  loadEstimationsList()
-  $("#estimation_time").val("")
-  $("#estimation_dialog").dialog("close")
+  buildEstimationObject: () ->
+    estimation =
+      card_id: app.getTargetId(@urlPattern)
+      user_time: $("#estimation_time").val()
+      user_username: app.getUsername()
+      # is_manager: $("#manager_estimation").prop("checked")
+      is_manager: false
 
-sendEstimation = ()->
-  app.ajaxCalls.push $.ajax "#{app.serverURL}/estimations",
-    method: "post"
-    dataType: "json"
-    data:
-      estimation: buildEstimationObject()
-    success: closeEstimationModal
-    error: app.ajaxErrorAlert
+  closeEstimationModal: (response) ->
+    $("#estimation_section").remove()
+    card.loadEstimationsList()
+    $("#estimation_time").val("")
+    $("#estimation_dialog").dialog("close")
 
-bindEstimationModalEvents = ()->
-  $("#estimation_modal_btn").click (e)->
-    e.preventDefault()
-    e.stopPropagation()
-    sendEstimation()
-    false
+  sendEstimation: () ->
+    ajaxCall = $.ajax "#{app.serverURL}/estimations",
+      method: "post"
+      dataType: "json"
+      data:
+        estimation: this.buildEstimationObject()
+      success: this.closeEstimationModal
+      error: app.ajaxErrorAlert
 
-openEstimationModal = (html)->
-  $("body").append(html)
-  bindEstimationModalEvents()
+    app.ajaxCalls.push ajaxCall
 
-  $("#estimation_dialog").dialog
-    autoOpen: false
-    modal: true
-    dialogClass: "estimation_custom_dialog"
-    title: "Estimate time for this card"
+  bindEstimationModalEvents: () ->
+    $("#estimation_modal_btn").click (e) =>
+      e.preventDefault()
+      e.stopPropagation()
+      this.sendEstimation()
+      false
 
-loadEstimationModal = ()->
-  app.ajaxCalls.push $.ajax chrome.extension.getURL("dist/html/estimation_modal.html"),
-    dataType: 'html'
-    success: openEstimationModal
+  openEstimationModal: (html) ->
+    $("body").append(html)
+    card.bindEstimationModalEvents()
 
-createEstimationButton = (html)->
-  sidebar = $(".window-sidebar")
-  actions = sidebar.children(".other-actions") # only board owner
-  if actions.length == 0
-    actions = sidebar.children(".window-module").eq(0)
+    $("#estimation_dialog").dialog
+      autoOpen: false
+      modal: true
+      dialogClass: "estimation_custom_dialog"
+      title: "Estimate time for this card"
 
-  actions.children(".u-clearfix").prepend(html)
-  loadEstimationModal() if $("#estimation_dialog").length == 0
+  loadEstimationModal: () ->
+    htmlPath  = chrome.extension.getURL("#{@htmlDir}/estimation_modal.html")
+    ajaxCall  = $.ajax htmlPath,
+      dataType: "html"
+      success: this.openEstimationModal
 
-  $(".js-add-estimation-menu").on "click", ()->
-    $("#estimation_dialog").dialog("open")
+    app.ajaxCalls.push ajaxCall
 
-loadEstimationButton = ()->
-  app.ajaxCalls.push $.ajax chrome.extension.getURL("dist/html/card_estimation_btn.html"),
-    dataType: 'html'
-    success: createEstimationButton
+  createEstimationButton: (html) ->
+    sidebar = $(".window-sidebar")
+    actions = sidebar.children(".other-actions") # only board owner
+    if actions.length == 0
+      actions = sidebar.children(".window-module").eq(0)
 
-cardUnderestimated = ()->
-  $("#estimation_progress").addClass("bar-danger")
-  $("#estimation_progress").css("width", "100%")
+    actions.children(".u-clearfix").prepend(html)
+    card.loadEstimationModal() if $("#estimation_dialog").length == 0
 
-cardInProgress = (total_worked)->
-  $("#estimation_progress").css("width", "#{total_worked}%")
-  $("#estimation_progress").closest(".progress").attr("title", "Card #{total_worked.toFixed(2)}% done")
+    $(".js-add-estimation-menu").on "click", () ->
+      $("#estimation_dialog").dialog("open")
 
-loadEstimationTimeTrackerBar = (total_tracked_time, total_estimation_time)->
-  if total_tracked_time > total_estimation_time
-    cardUnderestimated()
-  else
-    total_worked = (100 * total_tracked_time) / total_estimation_time
-    cardInProgress(total_worked)
+  loadEstimationButton: () ->
+    htmlPath = chrome.extension.getURL("#{@htmlDir}/card_estimation_btn.html")
+    ajaxCall = $.ajax htmlPath,
+      dataType: "html"
+      success: this.createEstimationButton
 
-calc_total_estimation = (estimations)->
-  reduce_func = (total, estimation)->
-    if estimation.is_manager == null || estimation.is_manager == false
-      total + estimation.user_time
+    app.ajaxCalls.push ajaxCall
+
+  cardUnderestimated: () ->
+    $("#estimation_progress").addClass("bar-danger")
+    $("#estimation_progress").css("width", "100%")
+
+  cardInProgress: (trackedRatio) ->
+    $("#estimation_progress").css("width", "#{trackedRatio}%")
+    $("#estimation_progress").closest(".progress").attr("title", "Card #{trackedRatio.toFixed(2)}% done")
+
+  loadTimeBar: (trackedTime, estimatedTime) ->
+    if trackedTime > estimatedTime
+      this.cardUnderestimated()
     else
-      total
-  estimations.reduce(reduce_func, 0)
+      trackedRatio = (100 * trackedTime) / estimatedTime
+      this.cardInProgress(trackedRatio)
 
-add_estimation_to_list = (estimation)->
-  is_manager = ""
-  is_manager = "(M)" if estimation.is_manager
+  totalEstimation: (estimations) ->
+    reduce_func = (total, estimation) ->
+      if estimation.is_manager == null || estimation.is_manager == false
+        total + estimation.user_time
+      else
+        total
+    estimations.reduce(reduce_func, 0)
 
-  html = "<tr><td>#{is_manager} #{estimation.user_name}</td><td>#{estimation.user_time}</td></tr>"
-  $(".estimations").find("tbody").append(html)
+  insertEstimation: (estimation) ->
+    is_manager = ""
+    is_manager = "(M)" if estimation.is_manager
 
-populateEstimationSection = (response)->
-  total_estimation = calc_total_estimation(response.estimations)
-  loadEstimationTimeTrackerBar(response.total_tracked_time, total_estimation)
+    html = "<tr><td>#{is_manager} #{estimation.user_name}</td><td>#{estimation.user_time}</td></tr>"
+    $(".estimations").find("tbody").append(html)
 
-  for estimation in response.estimations
-    add_estimation_to_list(estimation)
+  populateEstimationSection: (response) ->
+    _this = card
+    estimatedTime = _this.totalEstimation(response.estimations)
+    _this.loadTimeBar(response.total_tracked_time, estimatedTime)
 
-  $("#floatingCirclesG").hide()
-  $("#estimations_content").show()
+    for estimation in response.estimations
+      _this.insertEstimation(estimation)
 
-  $("#estimated_time_span")
-    .text("Estimated Total: #{total_estimation}")
-    .css("font-weight", "bold")
+    $("#floatingCirclesG").hide()
+    $("#estimations_content").show()
 
-  $("#tracked_time_span")
-    .text("Tracked Total: #{response.total_tracked_time}")
-    .css("font-weight", "bold")
+    $("#estimated_time_span")
+      .text("Estimated Total: #{estimatedTime}")
+      .css("font-weight", "bold")
 
-getEstimations = ()->
-  app.ajaxCalls.push $.ajax "#{app.serverURL}/estimations",
-    data:
-      card_id: app.getTargetId(cardPattern)
-      member_name: app.getUsername()
-    success: populateEstimationSection
-    error: app.ajaxErrorAlert
+    $("#tracked_time_span")
+      .text("Tracked Total: #{response.total_tracked_time}")
+      .css("font-weight", "bold")
 
-loadEstimationsList = ()->
-  app.ajaxCalls.push $.ajax chrome.extension.getURL("dist/html/estimations.html"),
-    dataType: 'html'
-    success: (html)->
-      $(".card-detail-data").prepend(html)
-      getEstimations()
+  getEstimations: () ->
+    ajaxCall = $.ajax "#{app.serverURL}/estimations",
+      data:
+        card_id: app.getTargetId(@urlPattern)
+        member_name: app.getUsername()
+      success: this.populateEstimationSection
+      error: app.ajaxErrorAlert
 
-loadCard = ()->
-  loadEstimationButton()
-  loadEstimationsList()
+    app.ajaxCalls.push ajaxCall
+
+  loadEstimationsList: () ->
+    htmlPath = chrome.extension.getURL("#{@htmlDir}/estimations.html")
+    ajaxCall = $.ajax htmlPath,
+      dataType: "html"
+      success: (html) =>
+        $(".card-detail-data").prepend(html)
+        this.getEstimations()
+
+    app.ajaxCalls.push ajaxCall
+
+  load: () ->
+    this.loadEstimationButton()
+    this.loadEstimationsList()

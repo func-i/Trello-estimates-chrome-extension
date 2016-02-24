@@ -5,4 +5,4 @@ chrome.runtime.onMessage.addListener (message, sender, sendResponse)->
 
   if app.cardIsOpen() && $(".js-add-estimation-menu").length == 0
     app.abortAjaxCalls()
-    loadCard()
+    card.load()

@@ -1,4 +1,4 @@
-window.trelloEstimationApp =
+app =
   serverURL: "https://estimation-fi.herokuapp.com"
   # serverURL: "https://localhost:5000"
 

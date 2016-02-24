@@ -1,64 +1,14 @@
 card =
   urlPattern: /^https:\/\/trello.com\/c\/(\S+)\/(\S+)$/
 
-  buildEstimationObject: () ->
-    estimation =
-      card_id: app.getTargetId(@urlPattern)
-      user_time: $("#estimation_time").val()
-      user_username: app.getUsername()
-      # is_manager: $("#manager_estimation").prop("checked")
-      is_manager: false
-
-  closeEstimationModal: (response) ->
-    $("#estimation_section").remove()
-    card.loadEstimationsList()
-    $("#estimation_time").val("")
-    $("#estimation_dialog").dialog("close")
-
-  sendEstimation: () ->
-    ajaxCall = $.ajax "#{app.serverURL}/estimations",
-      method: "post"
-      dataType: "json"
-      data:
-        estimation: this.buildEstimationObject()
-      success: this.closeEstimationModal
-      error: app.ajaxErrorAlert
-
-    app.ajaxCalls.push ajaxCall
-
-  bindEstimationModalEvents: () ->
-    $("#estimation_modal_btn").click (e) =>
-      e.preventDefault()
-      e.stopPropagation()
-      this.sendEstimation()
-      false
-
-  openEstimationModal: (html) ->
-    $("body").append(html)
-    card.bindEstimationModalEvents()
-
-    $("#estimation_dialog").dialog
-      autoOpen: false
-      modal: true
-      dialogClass: "estimation_custom_dialog"
-      title: "Estimate time for this card"
-
-  loadEstimationModal: () ->
-    htmlPath  = chrome.extension.getURL("#{app.htmlDir}/estimation_modal.html")
-    ajaxCall  = $.ajax htmlPath,
-      dataType: "html"
-      success: this.openEstimationModal
-
-    app.ajaxCalls.push ajaxCall
-
-  createEstimationButton: (html) ->
+  addEstimationButton: (html) ->
     sidebar = $(".window-sidebar")
     actions = sidebar.children(".other-actions") # only board owner
     if actions.length == 0
       actions = sidebar.children(".window-module").eq(0)
 
     actions.children(".u-clearfix").prepend(html)
-    card.loadEstimationModal() if $("#estimation_dialog").length == 0
+    estimationModal.load() if $("#estimation_dialog").length == 0
 
     $(".js-add-estimation-menu").on "click", () ->
       $("#estimation_dialog").dialog("open")
@@ -67,7 +17,7 @@ card =
     htmlPath = chrome.extension.getURL("#{app.htmlDir}/card_estimation_btn.html")
     ajaxCall = $.ajax htmlPath,
       dataType: "html"
-      success: this.createEstimationButton
+      success: this.addEstimationButton
 
     app.ajaxCalls.push ajaxCall
 

@@ -1,8 +1,9 @@
 (function() {
-  var app, board, card;
+  var app, board, card, estimationModal;
 
   app = {
     serverURL: "https://estimation-fi.herokuapp.com",
+    htmlDir: "dist/html",
     ajaxCalls: [],
     ajaxErrorAlert: function(jqXHR) {
       return alert("Error: " + jqXHR.responseText);
@@ -138,65 +139,7 @@
 
   card = {
     urlPattern: /^https:\/\/trello.com\/c\/(\S+)\/(\S+)$/,
-    htmlDir: "dist/html",
-    buildEstimationObject: function() {
-      var estimation;
-      return estimation = {
-        card_id: app.getTargetId(this.urlPattern),
-        user_time: $("#estimation_time").val(),
-        user_username: app.getUsername(),
-        is_manager: false
-      };
-    },
-    closeEstimationModal: function(response) {
-      $("#estimation_section").remove();
-      card.loadEstimationsList();
-      $("#estimation_time").val("");
-      return $("#estimation_dialog").dialog("close");
-    },
-    sendEstimation: function() {
-      var ajaxCall;
-      ajaxCall = $.ajax(app.serverURL + "/estimations", {
-        method: "post",
-        dataType: "json",
-        data: {
-          estimation: this.buildEstimationObject()
-        },
-        success: this.closeEstimationModal,
-        error: app.ajaxErrorAlert
-      });
-      return app.ajaxCalls.push(ajaxCall);
-    },
-    bindEstimationModalEvents: function() {
-      return $("#estimation_modal_btn").click((function(_this) {
-        return function(e) {
-          e.preventDefault();
-          e.stopPropagation();
-          _this.sendEstimation();
-          return false;
-        };
-      })(this));
-    },
-    openEstimationModal: function(html) {
-      $("body").append(html);
-      card.bindEstimationModalEvents();
-      return $("#estimation_dialog").dialog({
-        autoOpen: false,
-        modal: true,
-        dialogClass: "estimation_custom_dialog",
-        title: "Estimate time for this card"
-      });
-    },
-    loadEstimationModal: function() {
-      var ajaxCall, htmlPath;
-      htmlPath = chrome.extension.getURL(this.htmlDir + "/estimation_modal.html");
-      ajaxCall = $.ajax(htmlPath, {
-        dataType: "html",
-        success: this.openEstimationModal
-      });
-      return app.ajaxCalls.push(ajaxCall);
-    },
-    createEstimationButton: function(html) {
+    addEstimationButton: function(html) {
       var actions, sidebar;
       sidebar = $(".window-sidebar");
       actions = sidebar.children(".other-actions");
@@ -205,7 +148,7 @@
       }
       actions.children(".u-clearfix").prepend(html);
       if ($("#estimation_dialog").length === 0) {
-        card.loadEstimationModal();
+        estimationModal.load();
       }
       return $(".js-add-estimation-menu").on("click", function() {
         return $("#estimation_dialog").dialog("open");
@@ -213,10 +156,10 @@
     },
     loadEstimationButton: function() {
       var ajaxCall, htmlPath;
-      htmlPath = chrome.extension.getURL(this.htmlDir + "/card_estimation_btn.html");
+      htmlPath = chrome.extension.getURL(app.htmlDir + "/card_estimation_btn.html");
       ajaxCall = $.ajax(htmlPath, {
         dataType: "html",
-        success: this.createEstimationButton
+        success: this.addEstimationButton
       });
       return app.ajaxCalls.push(ajaxCall);
     },
@@ -286,7 +229,7 @@
     },
     loadEstimationsList: function() {
       var ajaxCall, htmlPath;
-      htmlPath = chrome.extension.getURL(this.htmlDir + "/estimations.html");
+      htmlPath = chrome.extension.getURL(app.htmlDir + "/estimations.html");
       ajaxCall = $.ajax(htmlPath, {
         dataType: "html",
         success: (function(_this) {
@@ -301,6 +244,68 @@
     load: function() {
       this.loadEstimationButton();
       return this.loadEstimationsList();
+    }
+  };
+
+  estimationModal = {
+    card: null,
+    buildEstimationObject: function() {
+      var estimation;
+      return estimation = {
+        card_id: app.getTargetId(this.card.urlPattern),
+        user_time: $("#estimation_time").val(),
+        user_username: app.getUsername(),
+        is_manager: false
+      };
+    },
+    closeEstimationModal: function(response) {
+      $("#estimation_section").remove();
+      this.card.loadEstimationsList();
+      $("#estimation_time").val("");
+      return $("#estimation_dialog").dialog("close");
+    },
+    sendEstimation: function() {
+      var ajaxCall;
+      ajaxCall = $.ajax(app.serverURL + "/estimations", {
+        method: "post",
+        dataType: "json",
+        data: {
+          estimation: this.buildEstimationObject()
+        },
+        success: this.closeEstimationModal,
+        error: app.ajaxErrorAlert
+      });
+      return app.ajaxCalls.push(ajaxCall);
+    },
+    bindEvents: function() {
+      return $("#estimation_modal_btn").click((function(_this) {
+        return function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          _this.sendEstimation();
+          return false;
+        };
+      })(this));
+    },
+    open: function(html) {
+      $("body").append(html);
+      estimationModal.bindEvents();
+      return $("#estimation_dialog").dialog({
+        autoOpen: false,
+        modal: true,
+        dialogClass: "estimation_custom_dialog",
+        title: "Estimate time for this card"
+      });
+    },
+    load: function(card) {
+      var ajaxCall, htmlPath;
+      this.card = card;
+      htmlPath = chrome.extension.getURL(app.htmlDir + "/estimation_modal.html");
+      ajaxCall = $.ajax(htmlPath, {
+        dataType: "html",
+        success: this.open
+      });
+      return app.ajaxCalls.push(ajaxCall);
     }
   };
 

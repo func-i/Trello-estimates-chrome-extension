@@ -55,6 +55,7 @@ module.exports = function(grunt) {
             'src/script/app.coffee',
             'src/script/board.coffee',
             'src/script/card.coffee',
+            'src/script/estimation-modal.coffee',
             'src/script/main.coffee'
           ] // concat then compile into single file
         }

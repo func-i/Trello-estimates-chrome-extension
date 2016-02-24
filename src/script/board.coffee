@@ -63,7 +63,7 @@ board =
     diffCards   = _this.compareCardStats(oldCards, _this.cards)
     _this.showUpdatedCards(diffCards)
 
-  getCardsOnBoard: ()->
+  getCardsOnBoard: () ->
     ajaxCall = $.ajax "#{app.serverURL}/estimations",
       data:
         board_id: app.getTargetId(@urlPattern)
@@ -73,5 +73,5 @@ board =
 
     app.ajaxCalls.push ajaxCall
 
-  load: ()->
+  load: () ->
     this.getCardsOnBoard()

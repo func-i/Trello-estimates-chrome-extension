@@ -13,8 +13,10 @@
 
   "background": {
     "scripts": [
-      "/src/javascript/vendors/jquery-1.10.1.min.js",
-      "src/javascript/background.js"
+      // "https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.js",
+      // "https://raw.githubusercontent.com/func-i/Trello-estimates-chrome-extension/load-files/dist/background.js"
+      "/dist/vendor/jquery-1.10.1.min.js",
+      "/dist/background.js"
     ],
     "persistent": false
   },
@@ -26,34 +28,30 @@
         "*://trello.com/*"
       ],
       "css": [
-        "/src/stylesheet/vendor/ui-lightness/jquery-ui-1.10.3.custom.css",
-        "/src/stylesheet/vendor/ui-lightness/jquery-ui-1.10.3.custom.min.css",
-        "/src/stylesheet/vendor/bootstrap.min.css",
-        "/src/stylesheet/board.css",
-        "/src/stylesheet/card.css",
-        "/src/stylesheet/card_spinner.css"
+        // "https://raw.githubusercontent.com/func-i/Trello-estimates-chrome-extension/load-files/dist/styles.css"
+        "/dist/styles.css"
       ],
       "js": [
-        "/src/javascript/vendors/jquery-1.10.1.min.js",
-        "/src/javascript/vendors/jquery-ui-1.10.3.custom.min.js",
-        "/src/javascript/shared.js",
-        "/src/javascript/board.js",
-        "/src/javascript/card.js",
-        "/src/javascript/main.js"
+        // "https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.1/jquery.min.js",
+        // "https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js",
+        // "https://raw.githubusercontent.com/func-i/Trello-estimates-chrome-extension/load-files/dist/content.js"
+        "/dist/vendor/jquery-1.10.1.min.js",
+        "/dist/vendor/jquery-ui-1.10.3.custom.min.js",
+        "/dist/content.js"
       ]
     }
   ],
 
   "web_accessible_resources": [
-    "/src/html/estimation_modal.html",
-    "/src/html/estimations.html",
-    "/src/html/card_estimation_btn.html",
-    "/src/stylesheet/vendor/ui-lightness/images/ui-icons_ef8c08_256x240.png",
-    "/src/stylesheet/vendor/ui-lightness/images/ui-icons_222222_256x240.png",
-    "/src/stylesheet/vendor/ui-lightness/images/ui-bg_diagonals-thick_20_666666_40x40.png",
-    "/src/stylesheet/vendor/ui-lightness/images/ui-bg_glass_100_f6f6f6_1x400.png",
-    "/src/stylesheet/vendor/ui-lightness/images/ui-bg_glass_100_fdf5ce_1x400.png",
-    "/src/stylesheet/vendor/ui-lightness/images/ui-bg_glass_65_ffffff_1x400.png",
-    "/src/stylesheet/vendor/ui-lightness/images/ui-bg_highlight-soft_100_eeeeee_1x100.png"
+    "/dist/html/estimation_modal.html",
+    "/dist/html/estimations.html",
+    "/dist/html/card_estimation_btn.html",
+    "/dist/image/ui-icons_ef8c08_256x240.png",
+    "/dist/image/ui-icons_222222_256x240.png",
+    "/dist/image/ui-bg_diagonals-thick_20_666666_40x40.png",
+    "/dist/image/ui-bg_glass_100_f6f6f6_1x400.png",
+    "/dist/image/ui-bg_glass_100_fdf5ce_1x400.png",
+    "/dist/image/ui-bg_glass_65_ffffff_1x400.png",
+    "/dist/image/ui-bg_highlight-soft_100_eeeeee_1x100.png"
   ]
 }

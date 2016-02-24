@@ -7,8 +7,10 @@
   "homepage": "https://github.com/func-i/Trello-estimates-chrome-extension#readme",
   "devDependencies": {
     "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-coffee": "^1.0.0",
     "grunt-contrib-concat": "^1.0.0",
+    "grunt-contrib-copy": "^0.8.2",
     "grunt-contrib-uglify": "^0.11.1"
   }
 }

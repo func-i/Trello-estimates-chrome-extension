@@ -5,7 +5,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-coffee');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
+  // grunt.loadNpmTasks('grunt-contrib-uglify');
 
 
   // Project configuration.
@@ -20,26 +20,37 @@ module.exports = function(grunt) {
       main: {
         files: [
           { expand: true, cwd: 'src/html', src: '**', dest: 'dist/html/' },
-          { expand: true, cwd: 'src/image', src: '**', dest: 'dist/image/' },
-          { expand: true, cwd: 'src/vendor', src: '**', dest: 'dist/vendor/' }
+          { expand: true, cwd: 'src/image', src: '**', dest: 'dist/img/' }
         ]
       }
     }, // copy
 
-    // concatenate CSS files
+    // concatenate CSS and vendor JS files
     concat: {
-      options: {
-        separator: '\n',
-      },
-      dist: {
+      css_vendor: {
+        options: { separator: '\n' },
         src: [
           'src/stylesheet/vendor/jquery-ui-1.10.3.custom.min.css',
-          'src/stylesheet/vendor/bootstrap.min.css',
+          'src/stylesheet/vendor/bootstrap.min.css'
+        ],
+        dest: 'dist/css/vendor.css'
+      },
+      css_styles: {
+        options: { separator: '\n' },
+        src: [
           'src/stylesheet/board.css',
           'src/stylesheet/card.css',
           'src/stylesheet/card_spinner.css'
         ],
-        dest: 'dist/styles.css',
+        dest: 'dist/css/styles.css'
+      },
+      js_vendor: {
+        options: { separator: ';\n' },
+        src: [
+          'src/script/vendor/jquery-1.10.1.min.js',
+          'src/script/vendor/jquery-ui-1.10.3.custom.min.js'
+        ],
+        dest: 'dist/js/vendor.js'
       }
     }, // concat
 
@@ -50,8 +61,8 @@ module.exports = function(grunt) {
           join: true
         },
         files: {
-          'dist/background.js': 'src/script/background.coffee',
-          'dist/content.js': [
+          'dist/js/background.js': 'src/script/background.coffee',
+          'dist/js/content.js': [
             'src/script/app.coffee',
             'src/script/board.coffee',
             'src/script/card.coffee',

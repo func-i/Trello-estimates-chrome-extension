@@ -1,16 +1,5 @@
 (function() {
-  chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-    debugger;
-    if (!message.loadExternal) {
-      return;
-    }
-    chrome.tabs.insertCSS(null, {
-      file: message.css
-    });
-    return chrome.tabs.executeScript(null, {
-      file: message.js
-    }, sendResponse);
-  });
+  var loadExternal;
 
   chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     if (changeInfo.status === "complete" && tab.url !== void 0) {
@@ -19,5 +8,26 @@
       });
     }
   });
+
+  chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+    if (message.injectJS) {
+      return loadExternal(sendResponse);
+    }
+  });
+
+  loadExternal = function(callback) {
+    var sourceDir;
+    sourceDir = "https://raw.githubusercontent.com/func-i/Trello-estimates-chrome-extension/load-files/dist/js/";
+    return $.ajax(sourceDir + "app.js", {
+      success: function(jsCode) {
+        return chrome.tabs.executeScript({
+          code: jsCode
+        }, callback);
+      },
+      error: function(jqXHR) {
+        return alert("Error: " + jqXHR.responseText);
+      }
+    });
+  };
 
 }).call(this);

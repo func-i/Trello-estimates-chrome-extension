@@ -2,27 +2,10 @@
 # Content script
 #
 
-sourceDir = "https://raw.githubusercontent.com/func-i/Trello-estimates-chrome-extension/load-files/dist"
-cssPath   = sourceDir + "/css/styles.css"
-jsPath    = sourceDir + "/js/app.js"
+# whether app.js has been injected on the current page
+jsInjected = false
 
-jsLoaded  = false # whether app.js has been loaded
-
-# Send message to background.js to load CSS and JS files
-chrome.runtime.sendMessage
-  loadExternal: true
-  css:  cssPath
-  js:   jsPath
- , (response) ->
-  jsLoaded = true
-
-# Run app.js on tab (page) update
-chrome.runtime.onMessage.addListener (message, sender, sendResponse) ->
-  debugger
-
-  return unless jsLoaded
-  return unless message.runApp
-
+runApp = () ->
   app = window.trelloEstimationApp
 
   if app.boardIsOpen()
@@ -32,3 +15,15 @@ chrome.runtime.onMessage.addListener (message, sender, sendResponse) ->
   if app.cardIsOpen() && $(".js-add-estimation-menu").length == 0
     app.abortAjaxCalls()
     app.card.load()
+
+# Run app.js on page update message from background.js
+chrome.runtime.onMessage.addListener (message, sender, sendResponse) ->
+  return unless message.runApp
+
+  if jsInjected
+    runApp()
+  else
+    # Send message to background.js to inject app.js
+    chrome.runtime.sendMessage { injectJS: true }, () ->
+      jsInjected = true
+      runApp()

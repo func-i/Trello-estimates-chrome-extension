@@ -1,31 +1,10 @@
 (function() {
-  var cssPath, jsLoaded, jsPath, sourceDir;
+  var jsInjected, runApp;
 
-  sourceDir = "https://raw.githubusercontent.com/func-i/Trello-estimates-chrome-extension/load-files/dist";
+  jsInjected = false;
 
-  cssPath = sourceDir + "/css/styles.css";
-
-  jsPath = sourceDir + "/js/app.js";
-
-  jsLoaded = false;
-
-  chrome.runtime.sendMessage({
-    loadExternal: true,
-    css: cssPath,
-    js: jsPath
-  }, function(response) {
-    return jsLoaded = true;
-  });
-
-  chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-    debugger;
+  runApp = function() {
     var app;
-    if (!jsLoaded) {
-      return;
-    }
-    if (!message.runApp) {
-      return;
-    }
     app = window.trelloEstimationApp;
     if (app.boardIsOpen()) {
       app.abortAjaxCalls();
@@ -34,6 +13,22 @@
     if (app.cardIsOpen() && $(".js-add-estimation-menu").length === 0) {
       app.abortAjaxCalls();
       return app.card.load();
+    }
+  };
+
+  chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+    if (!message.runApp) {
+      return;
+    }
+    if (jsInjected) {
+      return runApp();
+    } else {
+      return chrome.runtime.sendMessage({
+        injectJS: true
+      }, function() {
+        jsInjected = true;
+        return runApp();
+      });
     }
   });
 

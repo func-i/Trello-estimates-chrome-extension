@@ -8,6 +8,7 @@ chrome.tabs.onUpdated.addListener  (tabId, changeInfo, tab) ->
   if changeInfo.status == "complete" && tab.url != undefined
     chrome.tabs.sendMessage tabId, { runApp: true }
 
+
 # Load app.js from external source
 chrome.runtime.onMessage.addListener (message, sender, sendResponse) ->
   loadExternal(sendResponse) if message.injectJS
@@ -20,3 +21,5 @@ loadExternal = (callback) ->
       chrome.tabs.executeScript { code: jsCode }, callback
     error: (jqXHR) ->
       alert "Error: #{jqXHR.responseText}"
+
+  return true

@@ -27,6 +27,7 @@
         injectJS: true
       }, function() {
         jsInjected = true;
+        console.log("injectJS");
         return runApp();
       });
     }

@@ -16,6 +16,7 @@ runApp = () ->
     app.abortAjaxCalls()
     app.card.load()
 
+
 # Run app.js on page update message from background.js
 chrome.runtime.onMessage.addListener (message, sender, sendResponse) ->
   return unless message.runApp
@@ -26,4 +27,5 @@ chrome.runtime.onMessage.addListener (message, sender, sendResponse) ->
     # Send message to background.js to inject app.js
     chrome.runtime.sendMessage { injectJS: true }, () ->
       jsInjected = true
+      console.log("injectJS")
       runApp()

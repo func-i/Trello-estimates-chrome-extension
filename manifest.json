@@ -8,6 +8,7 @@
   "permissions": [
     "tabs",
     "https://raw.githubusercontent.com/",
+    "https://trello.com/",
     "https://localhost:5000/estimations",
     "https://estimation-fi.herokuapp.com/estimations"
   ],

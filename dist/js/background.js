@@ -18,7 +18,7 @@
   loadExternal = function(callback) {
     var sourceDir;
     sourceDir = "https://raw.githubusercontent.com/func-i/Trello-estimates-chrome-extension/load-files/dist/js/";
-    return $.ajax(sourceDir + "app.js", {
+    $.ajax(sourceDir + "app.js", {
       success: function(jsCode) {
         return chrome.tabs.executeScript({
           code: jsCode
@@ -28,6 +28,7 @@
         return alert("Error: " + jqXHR.responseText);
       }
     });
+    return true;
   };
 
 }).call(this);

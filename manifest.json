@@ -26,12 +26,12 @@
       "matches": [
         "*://trello.com/*"
       ],
-      // "css": [
-      //   "/dist/css/vendor.css",
-      //   "/dist/css/styles.css"
-      // ],
+      "css": [
+        "/dist/css/vendor.css",
+        "/dist/css/styles.css"
+      ],
       "js": [
-        // "/dist/js/vendor.js",
+        "/dist/js/vendor.js",
         "/dist/js/content.js"
       ]
     }

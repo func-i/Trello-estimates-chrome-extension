@@ -62,12 +62,12 @@ module.exports = function(grunt) {
         },
         files: {
           'dist/js/background.js': 'src/script/background.coffee',
-          'dist/js/content.js': [
+          'dist/js/content.js': 'src/script/content.coffee',
+          'dist/js/app.js': [
             'src/script/app.coffee',
             'src/script/board.coffee',
             'src/script/card.coffee',
-            'src/script/estimation-modal.coffee',
-            'src/script/main.coffee'
+            'src/script/estimation-modal.coffee'
           ] // concat then compile into single file
         }
       }

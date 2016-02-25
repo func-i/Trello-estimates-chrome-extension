@@ -20,17 +20,7 @@
     if (!message.runApp) {
       return;
     }
-    if (jsInjected) {
-      return runApp();
-    } else {
-      return chrome.runtime.sendMessage({
-        injectJS: true
-      }, function() {
-        jsInjected = true;
-        console.log("injectJS");
-        return runApp();
-      });
-    }
+    return runApp();
   });
 
 }).call(this);

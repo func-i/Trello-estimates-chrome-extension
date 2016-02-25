@@ -33,6 +33,7 @@
       ],
       "js": [
         "/dist/js/vendor.js",
+        "/dist/js/app.js", // keep this line only for development
         "/dist/js/content.js"
       ]
     }

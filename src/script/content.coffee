@@ -21,11 +21,12 @@ runApp = () ->
 chrome.runtime.onMessage.addListener (message, sender, sendResponse) ->
   return unless message.runApp
 
-  if jsInjected
-    runApp()
-  else
-    # Send message to background.js to inject app.js
-    chrome.runtime.sendMessage { injectJS: true }, () ->
-      jsInjected = true
-      console.log("injectJS")
-      runApp()
+  runApp() # development only, remove this and uncomment code below to deploy
+
+  # if jsInjected
+  #   runApp()
+  # else
+  #   # Send message to background.js to inject app.js
+  #   chrome.runtime.sendMessage { injectJS: true }, () ->
+  #     jsInjected = true
+  #     runApp()

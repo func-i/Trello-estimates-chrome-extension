@@ -152,7 +152,7 @@
       }
       actions.children(".u-clearfix").prepend(html);
       if ($("#estimation_dialog").length === 0) {
-        estimationModal.load();
+        estimationModal.load(this);
       }
       return $(".js-add-estimation-menu").on("click", function() {
         return $("#estimation_dialog").dialog("open");

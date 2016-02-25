@@ -152,7 +152,7 @@
       }
       actions.children(".u-clearfix").prepend(html);
       if ($("#estimation_dialog").length === 0) {
-        estimationModal.load(this);
+        estimationModal.load();
       }
       return $(".js-add-estimation-menu").on("click", function() {
         return $("#estimation_dialog").dialog("open");
@@ -254,11 +254,10 @@
   app.card = card;
 
   estimationModal = {
-    card: null,
     buildEstimationObject: function() {
       var estimation;
       return estimation = {
-        card_id: app.getTargetId(this.card.urlPattern),
+        card_id: app.getTargetId(card.urlPattern),
         user_time: $("#estimation_time").val(),
         user_username: app.getUsername(),
         is_manager: false
@@ -266,7 +265,7 @@
     },
     closeEstimationModal: function(response) {
       $("#estimation_section").remove();
-      this.card.loadEstimationsList();
+      card.loadEstimationsList();
       $("#estimation_time").val("");
       return $("#estimation_dialog").dialog("close");
     },
@@ -303,9 +302,8 @@
         title: "Estimate time for this card"
       });
     },
-    load: function(card) {
+    load: function() {
       var ajaxCall, htmlPath;
-      this.card = card;
       htmlPath = chrome.extension.getURL(app.htmlDir + "/estimation_modal.html");
       ajaxCall = $.ajax(htmlPath, {
         dataType: "html",

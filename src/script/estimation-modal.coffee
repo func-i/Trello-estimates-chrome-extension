@@ -1,10 +1,8 @@
 # Estimation Modal on each Trello Card
 estimationModal =
-  card: null
-
   buildEstimationObject: () ->
     estimation =
-      card_id: app.getTargetId(@card.urlPattern)
+      card_id: app.getTargetId(card.urlPattern)
       user_time: $("#estimation_time").val()
       user_username: app.getUsername()
       # is_manager: $("#manager_estimation").prop("checked")
@@ -12,7 +10,7 @@ estimationModal =
 
   closeEstimationModal: (response) ->
     $("#estimation_section").remove()
-    @card.loadEstimationsList()
+    card.loadEstimationsList()
     $("#estimation_time").val("")
     $("#estimation_dialog").dialog("close")
 
@@ -44,8 +42,7 @@ estimationModal =
       dialogClass: "estimation_custom_dialog"
       title: "Estimate time for this card"
 
-  load: (card) ->
-    @card     = card
+  load: () ->
     htmlPath  = chrome.extension.getURL("#{app.htmlDir}/estimation_modal.html")
     ajaxCall  = $.ajax htmlPath,
       dataType: "html"

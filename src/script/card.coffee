@@ -8,7 +8,7 @@ card =
       actions = sidebar.children(".window-module").eq(0)
 
     actions.children(".u-clearfix").prepend(html)
-    estimationModal.load(this) if $("#estimation_dialog").length == 0
+    estimationModal.load() if $("#estimation_dialog").length == 0
 
     $(".js-add-estimation-menu").on "click", () ->
       $("#estimation_dialog").dialog("open")

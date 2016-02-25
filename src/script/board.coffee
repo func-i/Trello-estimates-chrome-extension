@@ -75,3 +75,5 @@ board =
 
   load: () ->
     this.getCardsOnBoard()
+
+app.board = board

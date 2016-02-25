@@ -93,3 +93,5 @@ card =
   load: () ->
     this.loadEstimationButton()
     this.loadEstimationsList()
+
+app.card = card

@@ -40,3 +40,4 @@ app =
   cardIsOpen: ()->
     document.URL.indexOf("trello.com/c/") >= 0
 
+window.trelloEstimationApp = app

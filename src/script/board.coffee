@@ -16,7 +16,7 @@ board =
     console.log(diffCards)
     diffCards
 
-  cardStatsHtml: (stats) ->
+  buildStatsHtml: (stats) ->
     html = "["
     html += "#{stats.estimate} hrs" if stats.estimate
     html += " / "
@@ -25,7 +25,7 @@ board =
 
   addCardStats: (cardTitle, stats) ->
     statsDiv  = cardTitle.next(".card-fi-stats")
-    statsHtml = this.cardStatsHtml(stats)
+    statsHtml = this.buildStatsHtml(stats)
 
     if statsDiv.length == 0
       statsHtml = "<div class='card-fi-stats'>" + statsHtml + "</div>"
@@ -56,22 +56,36 @@ board =
       this.addCardStats(cardTitle, stats)
       this.setCardBackground(cardTitle, stats)
 
-  calcListTimes: () ->
+  calcListStats: (list, cardStatRE) ->
+    listEstimate = 0
+    listTracked  = 0
+
+    list.find(".card-fi-stats").each (i, cardStat) ->
+      stats = $(cardStat).text().match(cardStatRE)
+      if stats
+        listEstimate += parseFloat(stats[1].slice(0, -4)) if stats[1]
+        listTracked  += parseFloat(stats[2].slice(0, -4)) if stats[2]
+
+    { estimate: listEstimate, tracked: listTracked }
+
+  addListStats: (elemAbove, listStats) ->
+    statsDiv  = elemAbove.next(".list-fi-stats")
+    statsHtml = this.buildStatsHtml(listStats)
+
+    if statsDiv.length == 0
+      statsHtml = "<div class='list-fi-stats'>" + statsHtml + "</div>"
+      elemAbove.after(statsHtml)
+    else
+      statsDiv.empty().append(statsHtml)
+
+  updateLists: () ->
     cardStatRE = /^\[(\d*\.?\d+ hrs)? \/ (\d*\.?\d+ hrs)?\]$/
 
-    $(".list.js-list-content").each (index, list) ->
-      listEstimate = 0
-      listTracked  = 0
-
-      $(list).find(".card-fi-stats").each (i, cardStat) ->
-        stats = $(cardStat).text().match(cardStatRE)
-        if stats
-          listEstimate += parseFloat(stats[1].slice(0, -4)) if stats[1]
-          listTracked  += parseFloat(stats[2].slice(0, -4)) if stats[2]
-
-      console.log("listEstimate: " + listEstimate)
-      console.log("listTracked: " + listTracked)
-
+    $(".list.js-list-content").each (index, listElem) =>
+      list = $(listElem)
+      elemAbove = list.find(".list-header-num-cards")
+      listStats = this.calcListStats(list, cardStatRE)
+      this.addListStats(elemAbove, listStats)
 
   updateCards: (response) ->
     _this       = board
@@ -79,7 +93,7 @@ board =
     _this.cards = response
     diffCards   = _this.compareCardStats(oldCards, _this.cards)
     _this.showUpdatedCards(diffCards)
-    _this.calcListTimes()
+    _this.updateLists()
 
   getCardsOnBoard: () ->
     ajaxCall = $.ajax "#{app.serverURL}/estimations",

@@ -63,7 +63,7 @@
       console.log(diffCards);
       return diffCards;
     },
-    cardStatsHtml: function(stats) {
+    buildStatsHtml: function(stats) {
       var html;
       html = "[";
       if (stats.estimate) {
@@ -78,7 +78,7 @@
     addCardStats: function(cardTitle, stats) {
       var statsDiv, statsHtml;
       statsDiv = cardTitle.next(".card-fi-stats");
-      statsHtml = this.cardStatsHtml(stats);
+      statsHtml = this.buildStatsHtml(stats);
       if (statsDiv.length === 0) {
         statsHtml = "<div class='card-fi-stats'>" + statsHtml + "</div>";
         return cardTitle.after(statsHtml);
@@ -114,28 +114,50 @@
       }
       return results;
     },
-    calcListTimes: function() {
+    calcListStats: function(list, cardStatRE) {
+      var listEstimate, listTracked;
+      listEstimate = 0;
+      listTracked = 0;
+      list.find(".card-fi-stats").each(function(i, cardStat) {
+        var stats;
+        stats = $(cardStat).text().match(cardStatRE);
+        if (stats) {
+          if (stats[1]) {
+            listEstimate += parseFloat(stats[1].slice(0, -4));
+          }
+          if (stats[2]) {
+            return listTracked += parseFloat(stats[2].slice(0, -4));
+          }
+        }
+      });
+      return {
+        estimate: listEstimate,
+        tracked: listTracked
+      };
+    },
+    addListStats: function(elemAbove, listStats) {
+      var statsDiv, statsHtml;
+      statsDiv = elemAbove.next(".list-fi-stats");
+      statsHtml = this.buildStatsHtml(listStats);
+      if (statsDiv.length === 0) {
+        statsHtml = "<div class='list-fi-stats'>" + statsHtml + "</div>";
+        return elemAbove.after(statsHtml);
+      } else {
+        return statsDiv.empty().append(statsHtml);
+      }
+    },
+    updateLists: function() {
       var cardStatRE;
       cardStatRE = /^\[(\d*\.?\d+ hrs)? \/ (\d*\.?\d+ hrs)?\]$/;
-      return $(".list.js-list-content").each(function(index, list) {
-        var listEstimate, listTracked;
-        listEstimate = 0;
-        listTracked = 0;
-        $(list).find(".card-fi-stats").each(function(i, cardStat) {
-          var stats;
-          stats = $(cardStat).text().match(cardStatRE);
-          if (stats) {
-            if (stats[1]) {
-              listEstimate += parseFloat(stats[1].slice(0, -4));
-            }
-            if (stats[2]) {
-              return listTracked += parseFloat(stats[2].slice(0, -4));
-            }
-          }
-        });
-        console.log("listEstimate: " + listEstimate);
-        return console.log("listTracked: " + listTracked);
-      });
+      return $(".list.js-list-content").each((function(_this) {
+        return function(index, listElem) {
+          var elemAbove, list, listStats;
+          list = $(listElem);
+          elemAbove = list.find(".list-header-num-cards");
+          listStats = _this.calcListStats(list, cardStatRE);
+          return _this.addListStats(elemAbove, listStats);
+        };
+      })(this));
     },
     updateCards: function(response) {
       var _this, diffCards, oldCards;
@@ -144,7 +166,7 @@
       _this.cards = response;
       diffCards = _this.compareCardStats(oldCards, _this.cards);
       _this.showUpdatedCards(diffCards);
-      return _this.calcListTimes();
+      return _this.updateLists();
     },
     getCardsOnBoard: function() {
       var ajaxCall;

@@ -56,12 +56,30 @@ board =
       this.addCardStats(cardTitle, stats)
       this.setCardBackground(cardTitle, stats)
 
+  calcListTimes: () ->
+    cardStatRE = /^\[(\d*\.?\d+ hrs)? \/ (\d*\.?\d+ hrs)?\]$/
+
+    $(".list.js-list-content").each (index, list) ->
+      listEstimate = 0
+      listTracked  = 0
+
+      $(list).find(".card-fi-stats").each (i, cardStat) ->
+        stats = $(cardStat).text().match(cardStatRE)
+        if stats
+          listEstimate += parseFloat(stats[1].slice(0, -4)) if stats[1]
+          listTracked  += parseFloat(stats[2].slice(0, -4)) if stats[2]
+
+      console.log("listEstimate: " + listEstimate)
+      console.log("listTracked: " + listTracked)
+
+
   updateCards: (response) ->
     _this       = board
     oldCards    = JSON.parse(JSON.stringify(_this.cards))
     _this.cards = response
     diffCards   = _this.compareCardStats(oldCards, _this.cards)
     _this.showUpdatedCards(diffCards)
+    _this.calcListTimes()
 
   getCardsOnBoard: () ->
     ajaxCall = $.ajax "#{app.serverURL}/estimations",

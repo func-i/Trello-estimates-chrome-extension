@@ -9,11 +9,11 @@
       return alert("Error: " + jqXHR.responseText);
     },
     abortAjaxCalls: function() {
-      var ajaxCall, i, len, ref, results;
+      var ajaxCall, j, len, ref, results;
       ref = this.ajaxCalls;
       results = [];
-      for (i = 0, len = ref.length; i < len; i++) {
-        ajaxCall = ref[i];
+      for (j = 0, len = ref.length; j < len; j++) {
+        ajaxCall = ref[j];
         results.push(ajaxCall.abort());
       }
       return results;
@@ -114,13 +114,37 @@
       }
       return results;
     },
+    calcListTimes: function() {
+      var cardStatRE;
+      cardStatRE = /^\[(\d*\.?\d+ hrs)? \/ (\d*\.?\d+ hrs)?\]$/;
+      return $(".list.js-list-content").each(function(index, list) {
+        var listEstimate, listTracked;
+        listEstimate = 0;
+        listTracked = 0;
+        $(list).find(".card-fi-stats").each(function(i, cardStat) {
+          var stats;
+          stats = $(cardStat).text().match(cardStatRE);
+          if (stats) {
+            if (stats[1]) {
+              listEstimate += parseFloat(stats[1].slice(0, -4));
+            }
+            if (stats[2]) {
+              return listTracked += parseFloat(stats[2].slice(0, -4));
+            }
+          }
+        });
+        console.log("listEstimate: " + listEstimate);
+        return console.log("listTracked: " + listTracked);
+      });
+    },
     updateCards: function(response) {
       var _this, diffCards, oldCards;
       _this = board;
       oldCards = JSON.parse(JSON.stringify(_this.cards));
       _this.cards = response;
       diffCards = _this.compareCardStats(oldCards, _this.cards);
-      return _this.showUpdatedCards(diffCards);
+      _this.showUpdatedCards(diffCards);
+      return _this.calcListTimes();
     },
     getCardsOnBoard: function() {
       var ajaxCall;
@@ -205,13 +229,13 @@
       return $(".estimations").find("tbody").append(html);
     },
     populateEstimationSection: function(response) {
-      var _this, estimatedTime, estimation, i, len, ref;
+      var _this, estimatedTime, estimation, j, len, ref;
       _this = card;
       estimatedTime = _this.totalEstimation(response.estimations);
       _this.loadTimeBar(response.total_tracked_time, estimatedTime);
       ref = response.estimations;
-      for (i = 0, len = ref.length; i < len; i++) {
-        estimation = ref[i];
+      for (j = 0, len = ref.length; j < len; j++) {
+        estimation = ref[j];
         _this.insertEstimation(estimation);
       }
       $("#floatingCirclesG").hide();

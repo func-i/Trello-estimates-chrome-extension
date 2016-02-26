@@ -23,13 +23,13 @@ board =
     html += "#{stats.tracked} hrs" if stats.tracked
     html += "]"
 
-  addCardStats: (cardTitle, stats) ->
-    statsDiv  = cardTitle.next(".card-fi-stats")
+  addStatsBelow: (elemAbove, statsClass, stats) ->
+    statsDiv  = elemAbove.next("." + statsClass)
     statsHtml = this.buildStatsHtml(stats)
 
     if statsDiv.length == 0
-      statsHtml = "<div class='card-fi-stats'>" + statsHtml + "</div>"
-      cardTitle.after(statsHtml)
+      statsHtml = "<div class='#{statsClass}'>" + statsHtml + "</div>"
+      elemAbove.after(statsHtml)
     else
       statsDiv.empty().append(statsHtml)
 
@@ -53,7 +53,7 @@ board =
 
     for id, stats of cards
       cardTitle = cardTitles.filter("a[href^='/c/#{id}/']")
-      this.addCardStats(cardTitle, stats)
+      this.addStatsBelow(cardTitle, "card-fi-stats", stats)
       this.setCardBackground(cardTitle, stats)
 
   calcListStats: (list, cardStatRE) ->
@@ -68,16 +68,6 @@ board =
 
     { estimate: listEstimate, tracked: listTracked }
 
-  addListStats: (elemAbove, listStats) ->
-    statsDiv  = elemAbove.next(".list-fi-stats")
-    statsHtml = this.buildStatsHtml(listStats)
-
-    if statsDiv.length == 0
-      statsHtml = "<div class='list-fi-stats'>" + statsHtml + "</div>"
-      elemAbove.after(statsHtml)
-    else
-      statsDiv.empty().append(statsHtml)
-
   updateLists: () ->
     cardStatRE = /^\[(\d*\.?\d+ hrs)? \/ (\d*\.?\d+ hrs)?\]$/
 
@@ -85,7 +75,7 @@ board =
       list = $(listElem)
       elemAbove = list.find(".list-header-num-cards")
       listStats = this.calcListStats(list, cardStatRE)
-      this.addListStats(elemAbove, listStats)
+      this.addStatsBelow(elemAbove, "list-fi-stats", listStats)
 
   updateCards: (response) ->
     _this       = board

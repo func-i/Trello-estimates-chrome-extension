@@ -75,13 +75,13 @@
       }
       return html += "]";
     },
-    addCardStats: function(cardTitle, stats) {
+    addStatsBelow: function(elemAbove, statsClass, stats) {
       var statsDiv, statsHtml;
-      statsDiv = cardTitle.next(".card-fi-stats");
+      statsDiv = elemAbove.next("." + statsClass);
       statsHtml = this.buildStatsHtml(stats);
       if (statsDiv.length === 0) {
-        statsHtml = "<div class='card-fi-stats'>" + statsHtml + "</div>";
-        return cardTitle.after(statsHtml);
+        statsHtml = ("<div class='" + statsClass + "'>") + statsHtml + "</div>";
+        return elemAbove.after(statsHtml);
       } else {
         return statsDiv.empty().append(statsHtml);
       }
@@ -109,7 +109,7 @@
       for (id in cards) {
         stats = cards[id];
         cardTitle = cardTitles.filter("a[href^='/c/" + id + "/']");
-        this.addCardStats(cardTitle, stats);
+        this.addStatsBelow(cardTitle, "card-fi-stats", stats);
         results.push(this.setCardBackground(cardTitle, stats));
       }
       return results;
@@ -135,17 +135,6 @@
         tracked: listTracked
       };
     },
-    addListStats: function(elemAbove, listStats) {
-      var statsDiv, statsHtml;
-      statsDiv = elemAbove.next(".list-fi-stats");
-      statsHtml = this.buildStatsHtml(listStats);
-      if (statsDiv.length === 0) {
-        statsHtml = "<div class='list-fi-stats'>" + statsHtml + "</div>";
-        return elemAbove.after(statsHtml);
-      } else {
-        return statsDiv.empty().append(statsHtml);
-      }
-    },
     updateLists: function() {
       var cardStatRE;
       cardStatRE = /^\[(\d*\.?\d+ hrs)? \/ (\d*\.?\d+ hrs)?\]$/;
@@ -155,7 +144,7 @@
           list = $(listElem);
           elemAbove = list.find(".list-header-num-cards");
           listStats = _this.calcListStats(list, cardStatRE);
-          return _this.addListStats(elemAbove, listStats);
+          return _this.addStatsBelow(elemAbove, "list-fi-stats", listStats);
         };
       })(this));
     },
